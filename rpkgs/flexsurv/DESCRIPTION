@@ -1,0 +1,48 @@
+Package: flexsurv
+Type: Package
+Title: Flexible Parametric Survival and Multi-State Models
+Version: 2.0
+Date: 2021-02-22
+Authors@R: c(person("Christopher", "Jackson",
+         email="chris.jackson@mrc-bsu.cam.ac.uk",
+         role=c("aut", "cre")),
+	   person("Paul", "Metcalfe",
+         role=c("ctb")),
+	   person("Jordan", "Amdahl",
+         role=c("ctb")),
+         person("Matthew T.", "Warkentin",
+         role = c("ctb")),
+         person("Kevin", "Kunzmann",
+         role = c("ctb"))
+	   )
+Description: Flexible parametric models for time-to-event data,
+    including the Royston-Parmar spline model, generalized gamma and
+    generalized F distributions.  Any user-defined parametric
+    distribution can be fitted, given at least an R function defining
+    the probability density or hazard. There are also tools for
+    fitting and predicting from fully parametric multi-state models,
+    based on either cause-specific hazards or mixture models.
+License: GPL (>= 2)
+Depends: survival, R (>= 2.15.0)
+Imports: assertthat, deSolve, generics, magrittr, mstate (>= 0.2.10),
+        Matrix, muhaz, mvtnorm, numDeriv, quadprog, Rcpp (>= 0.11.5),
+        rlang, rstpm2, purrr, tibble, tidyr, dplyr, tidyselect
+Encoding: UTF-8
+Suggests: colorspace, eha, ggplot2, knitr, msm, testthat, TH.data
+URL: https://github.com/chjackson/flexsurv-dev
+BugReports: https://github.com/chjackson/flexsurv-dev/issues
+VignetteBuilder: knitr
+LazyData: yes
+LinkingTo: Rcpp
+RoxygenNote: 7.1.1
+NeedsCompilation: yes
+Packaged: 2021-02-22 19:14:12 UTC; chris
+Author: Christopher Jackson [aut, cre],
+  Paul Metcalfe [ctb],
+  Jordan Amdahl [ctb],
+  Matthew T. Warkentin [ctb],
+  Kevin Kunzmann [ctb]
+Maintainer: Christopher Jackson <chris.jackson@mrc-bsu.cam.ac.uk>
+Repository: CRAN
+Date/Publication: 2021-02-22 20:10:10 UTC
+Built: R 4.1.0; x86_64-pc-linux-gnu; 2021-07-26 04:05:10 UTC; unix

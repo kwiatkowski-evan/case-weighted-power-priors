@@ -1,0 +1,10 @@
+aghQuad                 Adaptive Gauss-Hermite quadrature using Laplace
+                        approximation
+evalHermitePoly         Evaluate Hermite polynomial at given location
+fastGHQuad-package      A package for fast, numerically-stable
+                        computation of Gauss-Hermite quadrature rules
+findPolyRoots           Find real parts of roots of polynomial
+gaussHermiteData        Compute Gauss-Hermite quadrature rule
+ghQuad                  Convenience function for Gauss-Hermite
+                        quadrature
+hermitePolyCoef         Get coefficient of Hermite polynomial

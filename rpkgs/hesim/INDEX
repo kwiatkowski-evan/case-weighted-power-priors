@@ -1,0 +1,110 @@
+CohortDtstm             Cohort discrete time state transition model
+CohortDtstmTrans        Transitions for a cohort discrete time state
+                        transition model
+CtstmTrans              An 'R6' base class for continuous time state
+                        transition models
+IndivCtstm              Individual-level continuous time state
+                        transition model
+IndivCtstmTrans         Transitions for an individual-level continuous
+                        time state transition model
+Psm                     N-state partitioned survival model
+PsmCurves               Partitioned survival curves
+StateVals               Model for state values
+apply_rr                Apply relative risks to transition probability
+                        matrices
+as.data.table.tparams_transprobs
+                        Coerce to 'data.table'
+as_array3               Convert between 2D tabular objects and 3D
+                        arrays
+as_pfs_os               Convert multi-state data to PFS and OS data
+autoplot.stateprobs     Plot state probabilities
+autoplot.survival       Plot survival curves
+bootstrap               Bootstrap a statistical model
+ce                      A cost-effectiveness object
+cea                     Cost-effectiveness analysis
+check_edata             Check data argument for 'create_input_mats'
+costs                   Costs object
+create_CohortDtstm      Create 'CohortDtstm' object
+create_CohortDtstmTrans
+                        Create 'CohortDtstmTrans' object
+create_IndivCtstmTrans
+                        Create 'IndivCtstmTrans' object
+create_PsmCurves        Create 'PsmCurves' object
+create_StateVals        Create a 'StateVals' object
+create_lines_dt         Create a data table of treatment lines
+create_params           Create a parameter object from a fitted model
+create_trans_dt         Create a data table of health state transitions
+define_model            Define and evaluate model expression
+define_rng              Define and evaluate random number generation
+                        expressions
+define_tparams          Define and evaluate transformed parameter
+                        expressions
+disprog                 Disease progression object
+expand.hesim_data       Expand hesim_data
+expmat                  Matrix exponential
+fast_rgengamma          Random generation for generalized gamma
+                        distribution
+flexsurvreg_list        List of 'flexsurvreg' objects
+get_labels              Get value labels
+hesim                   'hesim': Health Economic Simulation Modeling
+                        and Decision Analysis
+hesim_data              Data for health economic simulation modeling
+hesim_survdists         List of survival distributions
+icea                    Individualized cost-effectiveness analysis
+icer                    Incremental cost-effectiveness ratio
+icer_tbl                ICER table
+id_attributes           Attributes for ID variables
+incr_effect             Incremental treatment effect
+input_mats              Input matrices for a statistical model
+mom_beta                Method of moments for beta distribution
+mom_gamma               Method of moments for gamma distribution
+mstate3_exdata          Example data for a reversible 3-state
+                        multi-state model
+multinom3_exdata        Example data for a 3-state multinomial model
+multinom_list           List of 'multinom' objects
+onc3                    Multi-state oncology data for 3-state model
+onc3p                   Multi-state panel oncology data for 3-state
+                        model
+params                  Parameter object
+params_joined_surv      Parameters of joined survival models
+params_joined_surv_list
+                        Parameters of joined lists of survival models
+params_lm               Parameters of a linear model
+params_mlogit           Parameters of a multinomial logit model
+params_mlogit_list      Parameters of a list of multinomial logit
+                        models
+params_surv             Parameters of a survival model
+params_surv_list        Parameters of a list of survival models
+plot_ceac               Plot cost-effectiveness acceptability curve
+plot_ceaf               Plot cost-effectiveness acceptability frontier
+plot_ceplane            Plot cost-effectiveness plane
+plot_evpi               Plot expected value of perfect information
+psm4_exdata             Example data for a 4-state partitioned survival
+                        model
+qalys                   Quality-adjusted life-years object
+qmatrix                 Transition intensity matrix
+qmatrix.matrix          Transition intensity matrix from tabular object
+qmatrix.msm             Transition intensity matrix from 'msm' object
+rcat                    Random generation for categorical distribution
+rdirichlet_mat          Random generation for multiple Dirichlet
+                        distributions
+rng_distributions       Random number generation distributions
+rpwexp                  Random generation for piecewise exponential
+                        distribution
+set_labels              Set value labels
+stateprobs              State probability object
+stateval_tbl            Table to store state value parameters
+summarize_ce            Summarize costs and effectiveness
+summary.ce              Summary method for cost-effectiveness object
+surv_quantile           Survival quantiles
+survival                Survival object
+time_intervals          Time intervals
+tparams                 Transformed parameter object
+tparams_mean            Predicted means
+tparams_transprobs      Transition probabilities
+tpmatrix                Transition probability matrix
+tpmatrix_id             Transition probability matrix IDs
+tpmatrix_names          Names for elements of a transition probability
+                        matrix
+weibullNMA              Parameterization of the Weibull distribution
+                        for network meta-analysis

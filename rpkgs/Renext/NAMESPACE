@@ -1,0 +1,86 @@
+importFrom(splines, splineDesign)
+import(stats)
+import(graphics)
+import(evd)
+import(numDeriv)
+importFrom("grDevices", "col2rgb", "rgb")
+importFrom("methods", "as", "is")
+importFrom("utils", "head", "read.csv", "tail")
+
+export(barplotRenouv,
+       expplot,
+       EM.mixexp,
+       mom.mixexp2, ini.mixexp2,
+       ## rRenouv,                         ## version > 2.2-4
+       fweibull, flomax,  fgamma, fmaxlo,  ## ML fits
+       ## fgpd1, flomax1, fmaxlo1,         ## ML fits with 1 param ?
+       gof.date, gofExp.test,
+       skip2noskip,
+       interevt,
+       dmixexp2, pmixexp2, qmixexp2, rmixexp2, hmixexp2, Hmixexp2,
+       dSLTW, pSLTW, qSLTW, rSLTW,
+       dGPD, pGPD, qGPD, rGPD, hGPD, HGPD,
+       dlomax, plomax, qlomax, rlomax,
+       dmaxlo, pmaxlo, qmaxlo, rmaxlo,
+       mom2par,
+       NBlevy,
+       plot.Rendata, summary.Rendata, print.summary.Rendata,
+       Renouv, RenouvNoEst,
+       predict.Renouv,
+       plot.Renouv, lines.Renouv,
+       summary.Renouv,
+       print.summary.Renouv, format.summary.Renouv,
+       ## makeMAXdata, makeOTSdata,
+       ## checkDist, makeFuns, transFuns,
+       roundPred,
+       OTjitter,
+       readXML,
+       RLplot, RLpar, RLlegend.ini, RLlegend.show,
+       weibplot,
+       OT2MAX, SandT,
+       fGEV.MAX, fGPD, parIni.MAX, parIni.OTS,
+       ## gpd2lomax, lomax2gpd, gpd2maxlo, maxlo2gpd, ## version > 2.2-4
+       Ren2gumbel, gumbel2Ren,
+       gev2Ren, Ren2gev,
+       spacings, spacings.numeric, spacings.Rendata,
+       parDeriv, rRendata,
+       PPplot, QQplot, ## , RLplot
+       Hpoints,
+       CV2, CV2.test, Jackson, Jackson.test,
+       pGreenwood1, qStat,
+       LRExp, LRExp.test,
+       LRGumbel, LRGumbel.test,
+       translude
+       )
+## some methods
+S3method(spacings, numeric)
+S3method(spacings, data.frame)
+
+## methods for rhe S3 class "Rendata"
+S3method(plot, Rendata)
+S3method(print, Rendata)
+## S3method(RLplot, Rendata)    ## for next version
+S3method(spacings, Rendata)
+S3method(summary, Rendata)
+
+S3method(print, summary.Rendata)
+
+## methods for rhe S3 class "Renouv"
+S3method(AIC, Renouv)
+S3method(anova, Renouv)
+S3method(BIC, Renouv)
+S3method(coef, Renouv)
+S3method(QQplot, Renouv)
+S3method(plot, Renouv)
+S3method(PPplot, Renouv)
+S3method(print, Renouv)
+S3method(lines, Renouv)
+S3method(logLik, Renouv)
+S3method(nobs, Renouv)
+S3method(predict, Renouv)
+## S3method(RLplot, Renouv)    ## for next version
+S3method(summary, Renouv)
+S3method(vcov, Renouv)
+
+S3method(format, summary.Renouv)
+S3method(print, summary.Renouv)

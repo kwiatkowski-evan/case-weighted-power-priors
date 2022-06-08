@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>R: R Interface to 'CmdStan'</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+<h1> R Interface to 'CmdStan'
+<img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
+</h1>
+<hr/>
+<div style="text-align: center;">
+<a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
+<a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
+</div><h2>Documentation for package &lsquo;cmdstanr&rsquo; version 0.4.0</h2>
+
+<ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
+</ul>
+
+<h2>Help Pages</h2>
+
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="cmdstanr-package.html">cmdstanr-package</a></td>
+<td>CmdStanR: the R interface to CmdStan</td></tr>
+<tr><td style="width: 25%;"><a href="read_cmdstan_csv.html">as_cmdstan_fit</a></td>
+<td>Read CmdStan CSV files into R</td></tr>
+<tr><td style="width: 25%;"><a href="install_cmdstan.html">check_cmdstan_toolchain</a></td>
+<td>Install CmdStan or clean and rebuild an existing installation</td></tr>
+<tr><td style="width: 25%;"><a href="model-method-check_syntax.html">check_syntax</a></td>
+<td>Check syntax of a Stan program</td></tr>
+<tr><td style="width: 25%;"><a href="CmdStanGQ.html">CmdStanGQ</a></td>
+<td>CmdStanGQ objects</td></tr>
+<tr><td style="width: 25%;"><a href="CmdStanMCMC.html">CmdStanMCMC</a></td>
+<td>CmdStanMCMC objects</td></tr>
+<tr><td style="width: 25%;"><a href="CmdStanMLE.html">CmdStanMLE</a></td>
+<td>CmdStanMLE objects</td></tr>
+<tr><td style="width: 25%;"><a href="CmdStanModel.html">CmdStanModel</a></td>
+<td>CmdStanModel objects</td></tr>
+<tr><td style="width: 25%;"><a href="cmdstanr-package.html">CmdStanR</a></td>
+<td>CmdStanR: the R interface to CmdStan</td></tr>
+<tr><td style="width: 25%;"><a href="cmdstanr-package.html">cmdstanr</a></td>
+<td>CmdStanR: the R interface to CmdStan</td></tr>
+<tr><td style="width: 25%;"><a href="cmdstanr_example.html">cmdstanr_example</a></td>
+<td>Fit models for use in examples</td></tr>
+<tr><td style="width: 25%;"><a href="CmdStanVB.html">CmdStanVB</a></td>
+<td>CmdStanVB objects</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-cmdstan_summary.html">cmdstan_diagnose</a></td>
+<td>Run CmdStan's 'stansummary' and 'diagnose' utilities</td></tr>
+<tr><td style="width: 25%;"><a href="install_cmdstan.html">cmdstan_make_local</a></td>
+<td>Install CmdStan or clean and rebuild an existing installation</td></tr>
+<tr><td style="width: 25%;"><a href="cmdstan_model.html">cmdstan_model</a></td>
+<td>Create a new CmdStanModel object</td></tr>
+<tr><td style="width: 25%;"><a href="set_cmdstan_path.html">cmdstan_path</a></td>
+<td>Get or set the file path to the CmdStan installation</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-cmdstan_summary.html">cmdstan_summary</a></td>
+<td>Run CmdStan's 'stansummary' and 'diagnose' utilities</td></tr>
+<tr><td style="width: 25%;"><a href="set_cmdstan_path.html">cmdstan_version</a></td>
+<td>Get or set the file path to the CmdStan installation</td></tr>
+<tr><td style="width: 25%;"><a href="model-method-compile.html">compile</a></td>
+<td>Compile a Stan program</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-save_output_files.html">data_file</a></td>
+<td>Save output and data files</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-draws.html">draws</a></td>
+<td>Extract posterior draws</td></tr>
+<tr><td style="width: 25%;"><a href="eng_cmdstan.html">eng_cmdstan</a></td>
+<td>CmdStan knitr engine for Stan</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-cmdstan_summary.html">fit-method-cmdstan_diagnose</a></td>
+<td>Run CmdStan's 'stansummary' and 'diagnose' utilities</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-cmdstan_summary.html">fit-method-cmdstan_summary</a></td>
+<td>Run CmdStan's 'stansummary' and 'diagnose' utilities</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-save_output_files.html">fit-method-data_file</a></td>
+<td>Save output and data files</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-draws.html">fit-method-draws</a></td>
+<td>Extract posterior draws</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-init.html">fit-method-init</a></td>
+<td>Extract user-specified initial values</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-inv_metric.html">fit-method-inv_metric</a></td>
+<td>Extract inverse metric (mass matrix) after MCMC</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-save_output_files.html">fit-method-latent_dynamics_files</a></td>
+<td>Save output and data files</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-loo.html">fit-method-loo</a></td>
+<td>Leave-one-out cross-validation (LOO-CV)</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-lp.html">fit-method-lp</a></td>
+<td>Extract log probability (target)</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-metadata.html">fit-method-metadata</a></td>
+<td>Extract metadata from CmdStan CSV files</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-mle.html">fit-method-mle</a></td>
+<td>Extract (penalized) maximum likelihood estimate after optimization</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-num_chains.html">fit-method-num_chains</a></td>
+<td>Extract number of chains after MCMC</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-output.html">fit-method-output</a></td>
+<td>Access console output</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-save_output_files.html">fit-method-output_files</a></td>
+<td>Save output and data files</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-summary.html">fit-method-print</a></td>
+<td>Compute a summary table of estimates and diagnostics</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-profiles.html">fit-method-profiles</a></td>
+<td>Return profiling data</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-save_output_files.html">fit-method-profile_files</a></td>
+<td>Save output and data files</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-return_codes.html">fit-method-return_codes</a></td>
+<td>Extract return codes from CmdStan</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-sampler_diagnostics.html">fit-method-sampler_diagnostics</a></td>
+<td>Extract sampler diagnostics after MCMC</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-save_output_files.html">fit-method-save_data_file</a></td>
+<td>Save output and data files</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-save_output_files.html">fit-method-save_latent_dynamics_files</a></td>
+<td>Save output and data files</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-save_object.html">fit-method-save_object</a></td>
+<td>Save fitted model object to a file</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-save_output_files.html">fit-method-save_output_files</a></td>
+<td>Save output and data files</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-save_output_files.html">fit-method-save_profile_files</a></td>
+<td>Save output and data files</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-summary.html">fit-method-summary</a></td>
+<td>Compute a summary table of estimates and diagnostics</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-time.html">fit-method-time</a></td>
+<td>Report timing of CmdStan runs</td></tr>
+<tr><td style="width: 25%;"><a href="model-method-generate-quantities.html">generate_quantities</a></td>
+<td>Run Stan's standalone generated quantities method</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-init.html">init</a></td>
+<td>Extract user-specified initial values</td></tr>
+<tr><td style="width: 25%;"><a href="install_cmdstan.html">install_cmdstan</a></td>
+<td>Install CmdStan or clean and rebuild an existing installation</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-inv_metric.html">inv_metric</a></td>
+<td>Extract inverse metric (mass matrix) after MCMC</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-save_output_files.html">latent_dynamics_files</a></td>
+<td>Save output and data files</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-loo.html">loo</a></td>
+<td>Leave-one-out cross-validation (LOO-CV)</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-lp.html">lp</a></td>
+<td>Extract log probability (target)</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-lp.html">lp_approx</a></td>
+<td>Extract log probability (target)</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-metadata.html">metadata</a></td>
+<td>Extract metadata from CmdStan CSV files</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-mle.html">mle</a></td>
+<td>Extract (penalized) maximum likelihood estimate after optimization</td></tr>
+<tr><td style="width: 25%;"><a href="model-method-check_syntax.html">model-method-check_syntax</a></td>
+<td>Check syntax of a Stan program</td></tr>
+<tr><td style="width: 25%;"><a href="model-method-compile.html">model-method-compile</a></td>
+<td>Compile a Stan program</td></tr>
+<tr><td style="width: 25%;"><a href="model-method-generate-quantities.html">model-method-generate-quantities</a></td>
+<td>Run Stan's standalone generated quantities method</td></tr>
+<tr><td style="width: 25%;"><a href="model-method-optimize.html">model-method-optimize</a></td>
+<td>Run Stan's optimization algorithms</td></tr>
+<tr><td style="width: 25%;"><a href="model-method-sample.html">model-method-sample</a></td>
+<td>Run Stan's MCMC algorithms</td></tr>
+<tr><td style="width: 25%;"><a href="model-method-sample_mpi.html">model-method-sample_mpi</a></td>
+<td>Run Stan's MCMC algorithms with MPI</td></tr>
+<tr><td style="width: 25%;"><a href="model-method-variational.html">model-method-variational</a></td>
+<td>Run Stan's variational approximation algorithms</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-num_chains.html">num_chains</a></td>
+<td>Extract number of chains after MCMC</td></tr>
+<tr><td style="width: 25%;"><a href="stan_threads.html">num_threads</a></td>
+<td>Set or get the number of threads used to execute Stan models</td></tr>
+<tr><td style="width: 25%;"><a href="model-method-optimize.html">optimize</a></td>
+<td>Run Stan's optimization algorithms</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-output.html">output</a></td>
+<td>Access console output</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-save_output_files.html">output_files</a></td>
+<td>Save output and data files</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-summary.html">print.CmdStanMCMC</a></td>
+<td>Compute a summary table of estimates and diagnostics</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-summary.html">print.CmdStanMLE</a></td>
+<td>Compute a summary table of estimates and diagnostics</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-summary.html">print.CmdStanVB</a></td>
+<td>Compute a summary table of estimates and diagnostics</td></tr>
+<tr><td style="width: 25%;"><a href="cmdstanr_example.html">print_example_program</a></td>
+<td>Fit models for use in examples</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-profiles.html">profiles</a></td>
+<td>Return profiling data</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-save_output_files.html">profile_files</a></td>
+<td>Save output and data files</td></tr>
+<tr><td style="width: 25%;"><a href="read_cmdstan_csv.html">read_cmdstan_csv</a></td>
+<td>Read CmdStan CSV files into R</td></tr>
+<tr><td style="width: 25%;"><a href="read_sample_csv.html">read_sample_csv</a></td>
+<td>Read CmdStan CSV files from sampling into R</td></tr>
+<tr><td style="width: 25%;"><a href="install_cmdstan.html">rebuild_cmdstan</a></td>
+<td>Install CmdStan or clean and rebuild an existing installation</td></tr>
+<tr><td style="width: 25%;"><a href="register_knitr_engine.html">register_knitr_engine</a></td>
+<td>Register CmdStanR's knitr engine for Stan</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-return_codes.html">return_codes</a></td>
+<td>Extract return codes from CmdStan</td></tr>
+<tr><td style="width: 25%;"><a href="model-method-sample.html">sample</a></td>
+<td>Run Stan's MCMC algorithms</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-sampler_diagnostics.html">sampler_diagnostics</a></td>
+<td>Extract sampler diagnostics after MCMC</td></tr>
+<tr><td style="width: 25%;"><a href="model-method-sample_mpi.html">sample_mpi</a></td>
+<td>Run Stan's MCMC algorithms with MPI</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-save_output_files.html">save_data_file</a></td>
+<td>Save output and data files</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-save_output_files.html">save_latent_dynamics_files</a></td>
+<td>Save output and data files</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-save_object.html">save_object</a></td>
+<td>Save fitted model object to a file</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-save_output_files.html">save_output_files</a></td>
+<td>Save output and data files</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-save_output_files.html">save_profile_files</a></td>
+<td>Save output and data files</td></tr>
+<tr><td style="width: 25%;"><a href="set_cmdstan_path.html">set_cmdstan_path</a></td>
+<td>Get or set the file path to the CmdStan installation</td></tr>
+<tr><td style="width: 25%;"><a href="stan_threads.html">set_num_threads</a></td>
+<td>Set or get the number of threads used to execute Stan models</td></tr>
+<tr><td style="width: 25%;"><a href="stan_threads.html">stan_threads</a></td>
+<td>Set or get the number of threads used to execute Stan models</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-summary.html">summary</a></td>
+<td>Compute a summary table of estimates and diagnostics</td></tr>
+<tr><td style="width: 25%;"><a href="fit-method-time.html">time</a></td>
+<td>Report timing of CmdStan runs</td></tr>
+<tr><td style="width: 25%;"><a href="model-method-variational.html">variational</a></td>
+<td>Run Stan's variational approximation algorithms</td></tr>
+<tr><td style="width: 25%;"><a href="write_stan_file.html">write_stan_file</a></td>
+<td>Write Stan code to a file</td></tr>
+<tr><td style="width: 25%;"><a href="write_stan_json.html">write_stan_json</a></td>
+<td>Write data to a JSON file readable by CmdStan</td></tr>
+<tr><td style="width: 25%;"><a href="write_stan_tempfile.html">write_stan_tempfile</a></td>
+<td>Write Stan code to a temporary file</td></tr>
+</table>
+</body></html>

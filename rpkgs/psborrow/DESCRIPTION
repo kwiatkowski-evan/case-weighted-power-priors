@@ -1,0 +1,34 @@
+Package: psborrow
+Title: Bayesian Dynamic Borrowing with Propensity Score
+Version: 0.1.0
+Authors@R: 
+    c(person(given = "Yichen",
+           family = "Lu",
+           role = c("aut"),
+           email = "lu.yichen@gene.com",
+           comment = c(ORCID = "")),
+    person(given = "Aijing",
+           family = "Lin",
+           role = c("ctb","cre"),
+           email = "lina21@gene.com"))      
+Description: A tool which aims to help evaluate the effect of external borrowing using an integrated approach described in Lewis et al., (2019) <doi:10.1080/19466315.2018.1497533> that combines propensity score and Bayesian dynamic borrowing methods.
+License: GPL (>= 3) | file LICENCE
+Encoding: UTF-8
+RoxygenNote: 7.1.1
+Imports: dplyr, tidyr, data.table, rjags, mvtnorm, matrixcalc, ggplot2,
+        foreach, doParallel, parallel, MatchIt, survival,
+        futile.logger, methods, utils
+Suggests: knitr, rmarkdown, testthat
+VignetteBuilder: knitr
+Collate: 'add_cov.R' 'add_time.R' 'add_mcmc.R' 'simu_cov.R'
+        'match_cov.R' 'simu_time.R' 'run_mcmc.R' 'get_summary.R'
+        'utils.R'
+Depends: R (>= 3.5.0)
+NeedsCompilation: no
+Packaged: 2021-06-03 18:36:38 UTC; kenne
+Author: Yichen Lu [aut],
+  Aijing Lin [ctb, cre]
+Maintainer: Aijing Lin <lina21@gene.com>
+Repository: CRAN
+Date/Publication: 2021-06-04 08:00:02 UTC
+Built: R 4.1.0; ; 2021-07-26 03:26:20 UTC; unix

@@ -1,0 +1,44 @@
+Rstpm2-package          Flexible parametric survival models.
+aft                     Parametric accelerated failure time model with
+                        smooth time functions
+aft-class               Class "stpm2" ~~~
+brcancer                German breast cancer data from Stata.
+coef<-                  Generic method to update the coef in an object.
+colon                   Colon cancer.
+cox.tvc                 Test for a time-varying effect in the 'coxph'
+                        model
+eform.stpm2             S3 method for to provide exponentiated
+                        coefficents with confidence intervals.
+grad                    gradient function (internal function)
+gsm                     Parametric and penalised generalised survival
+                        models
+gsm.control             Defaults for the gsm call
+incrVar                 Utility that returns a function to increment a
+                        variable in a data-frame.
+legendre.quadrature.rule.200
+                        Legendre quadrature rule for n=200.
+lhs                     Internal functions for the rstpm2 package.
+lines.stpm2             S3 methods for lines
+markov_msm              Predictions for continuous time, nonhomogeneous
+                        Markov multi-state models using parametric and
+                        penalised survival models.
+nsx                     Generate a Basis Matrix for Natural Cubic
+                        Splines (with eXtensions)
+nsxD                    Generate a Basis Matrix for the first
+                        derivative of Natural Cubic Splines (with
+                        eXtensions)
+numDeltaMethod          Calculate numerical delta method for non-linear
+                        predictions.
+plot-methods            plots for an stpm2 fit
+popmort                 Background mortality rates for the colon
+                        dataset.
+predict-methods         Predicted values for an stpm2 or pstpm2 fit
+predict.nsx             Evaluate a Spline Basis
+predictnl               Estimation of standard errors using the
+                        numerical delta method.
+predictnl-methods       ~~ Methods for Function predictnl ~~
+pstpm2-class            Class "pstpm2"
+residuals-methods       Residual values for an stpm2 or pstpm2 fit
+stpm2-class             Class "stpm2" ~~~
+tvcCoxph-class          Class '"tvcCoxph"'
+vuniroot                Vectorised One Dimensional Root (Zero) Finding

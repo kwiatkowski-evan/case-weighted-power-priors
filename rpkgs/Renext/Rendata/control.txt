@@ -1,0 +1,20 @@
+
+ERRORS/WARNINGS TODO list for programs
+======================================
+
+The following requirements are not checked by the schema validation.
+
+- OT events should have datetime >= start and <= end  given in OTinfo.
+
+- OTdata events must have value >= threshold given in OTinfo.
+
+- OTdata events must not lie within a period declared as missing 
+(check needs skip2noskip and missing period cleaning)
+
+- OTdata given effective duration must be close to the
+effective duration computed from the OTinfo dates and OTmissing
+total duration.
+
+- an OTSinfo theshold must be >= that in OTinfo
+
+- OTSdata events must have level >= theshold given in OTSinfo.

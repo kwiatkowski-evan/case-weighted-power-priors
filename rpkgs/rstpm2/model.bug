@@ -1,0 +1,15 @@
+model
+{
+    for (i in 1:N) {
+        y[i] ~ dnorm(0.00000E+00, 1)
+        x[i] ~ dinterval(y[i], thd)
+    }
+    for (i in 1:4) {
+        dthd[i] ~ dnorm(0.00000E+00, 1.00000E-04)
+    }
+    thd[1] <- -1000
+    thd[2] <- dthd[1]
+    for (i in 3:5) {
+        thd[i] <- thd[i - 1] + exp(dthd[i - 1])
+    }
+}

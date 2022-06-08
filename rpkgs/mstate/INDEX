@@ -1,0 +1,67 @@
+Cuminc                  Calculate nonparametric cumulative incidence
+                        functions and associated standard errors
+EBMT cause of death data
+                        Data from the European Society for Blood and
+                        Marrow Transplantation (EBMT)
+EBMT data               Data from the European Society for Blood and
+                        Marrow Transplantation (EBMT)
+EBMT platelet recovery data
+                        Data from the European Society for Blood and
+                        Marrow Transplantation (EBMT)
+EBMT year of relapse data
+                        Data from the European Society for Blood and
+                        Marrow Transplantation (EBMT)
+ELOS                    Expected length of stay
+LMAJ                    Landmark Aalen-Johansen method
+Liver cirrhosis data    Abnormal prothrombin levels in liver cirrhosis
+MarkovTest              Log-rank based test for the validity of the
+                        Markov assumption
+aidssi                  Data from the Amsterdam Cohort Studies on HIV
+                        infection and AIDS
+bmt                     BMT data from Klein and Moeschberger
+crprep.default          Function to create weighted data set for
+                        competing risks analyses
+cutLMms                 Cut a multi-state data set at a landmark time
+                        point
+etm2msdata              Converts between etm and msdata format
+events                  Count number of observed transitions
+expand.covs             Expand covariates in competing risks dataset in
+                        stacked format
+expand.covs.msdata      Expand covariates in multi-state dataset in
+                        long format
+msboot                  Bootstrap function in multi-state models
+msdata2etm              msdata to etm format
+msfit                   Compute subject-specific transition hazards
+                        with (co-)variances
+msprep                  Function to prepare dataset for multi-state
+                        modeling in long format from dataset in wide
+                        format
+mssample                Sample paths through a multi-state model
+mstate-package          Data preparation, estimation and prediction in
+                        multi-state models
+paths                   Find all possible trajectories through a given
+                        multi-state model
+plot.Cuminc             Plot method for Cuminc objects
+plot.MarkovTest         Plot method for a MarkovTest object
+plot.msfit              Plot method for an msfit object
+plot.probtrans          Plot method for a probtrans object
+print.MarkovTest        Print method for a MarkovTest object
+print.msdata            Print method for a msdata object
+print.summary.msfit     Print method for summary.msfit object
+print.summary.probtrans
+                        Print method for a summary.probtrans object
+probtrans               Compute subject-specific or overall transition
+                        probabilities with standard errors
+redrank                 Reduced rank proportional hazards model for
+                        competing risks and multi-state models
+summary.Cuminc          Summary method for a summary.Cuminc object
+summary.msfit           Summary method for an msfit object
+summary.probtrans       Summary method for a probtrans object
+trans2tra               Convert transition matrix from mstate to etm
+                        format
+transMat                Define transition matrix for multi-state model
+transhelp               Help functions for transition matrix
+vis.mirror.pt           Mirror plot comparing two probtrans objects
+vis.multiple.pt         Visualise multiple probtrans objects
+xsect                   Make a cross-section of multi-state data at a
+                        given time point

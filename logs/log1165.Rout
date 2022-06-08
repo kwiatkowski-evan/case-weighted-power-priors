@@ -1,0 +1,935 @@
+
+R version 4.1.0 (2021-05-18) -- "Camp Pontanezen"
+Copyright (C) 2021 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> rm(list = ls())
+> 
+> # for (idx_scale in seq(624, 854, by = 23)){
+> 
+> ptm <- proc.time()
+> 
+> if (Sys.getenv("USER") %in% c("kwiatkoe", "evankwiatkowski")) {
++   setwd("~/Documents/GitHub/case-adaptive-pp/large-sample-share/code")
++   Packages <- c("ggplot2", "survival", "ks", "survminer", "MASS", "hesim", "rjags", "psborrow", "cmdstanr")
++   lapply(Packages, library, character.only = TRUE)
++   idx_scale <- 602
++ } else { # longleaf
++   # install.packages("survival", lib = "../rpkgs", repos='http://cran.us.r-project.org')
++   library(ks, lib.loc = "../rpkgs/")
++   library(survival, lib.loc = "../rpkgs/")
++   library(psborrow, lib.loc = "../rpkgs/")
++   library(deSolve, lib.loc = "../rpkgs/")
++   library(mstate, lib.loc = "../rpkgs/")
++   library(muhaz, lib.loc = "../rpkgs/")
++   library(flexsurv, lib.loc = "../rpkgs/")
++   library(hesim, lib.loc = "../rpkgs/")
++   library(MASS)
++   library(dplyr)
++   library(rjags)
++   library(cmdstanr)
++   args <- commandArgs(trailingOnly = TRUE)  # sequence from batch file
++   idx_scale  <- as.numeric(args[1]);
++ }
+
+Attaching package: ‘dplyr’
+
+The following object is masked from ‘package:MASS’:
+
+    select
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Loading required package: coda
+Linked to JAGS 4.3.0
+Loaded modules: basemod,bugs
+This is cmdstanr version 0.4.0
+- Online documentation and vignettes at mc-stan.org/cmdstanr
+- CmdStan path set to: /nas/longleaf/apps/r/4.1.0/lib64/R/library/cmdstan-2.27.0
+- Use set_cmdstan_path() to change the path
+> 
+> source("01-config.R")
+> 
+> X3beta <- c(rep(0, trt_n + ctrl_n),
++             (X3_vec[idx_scale] == 0) * rep(c(log(c(1/((1:8) * 2), (1:8) * 2)), rep(0, length = 34)), each = 2) +
++               (X3_vec[idx_scale] == 1) * rep(1, h_n)) * scale_list[idx_scale]
+> 
+> outer_table <- matrix(NA, nrow = length(scale_list), ncol = length(names))
+> colnames(outer_table) <- names
+> outermost <- matrix(NA, nrow = idx_samp, ncol = length(names))
+> colnames(outermost) <- names
+> outer_a0 <- matrix(NA, nrow = (n.seg - 1) * h_n, ncol = idx_samp)
+> 
+> formula2 <- formula(paste("nu ~ treat +", paste(cov.names, collapse=" + "), " + interval + offset(log(expo)) - 1"))
+> formula1 <- formula(paste("nu ~ treat +", paste(cov.names, collapse=" + "), " + offset(log(expo))"))
+> formula2_no_trt <- formula(paste("nu ~ ", paste(cov.names, collapse=" + "), " + interval + offset(log(expo)) - 1"))
+> formula1_no_trt <- formula(paste("nu ~ ", paste(cov.names, collapse=" + "), " + offset(log(expo))"))
+> 
+> if (T1E_vec[idx_scale] == 1){ # (if T1E = 1 then treatment effect set to zero)
++   mu2["treat"] <- 0
++ }
+> 
+> # Reformat data to create rate matrices used to generate piecewise exponential data. ratemat for events, ratemat2 for censoring
+> X.long <- X.all[rep(seq_len(nrow(X.all)), each = length(cut.time)), ]
+> for (j in 1:length(cut.time)){
++   X.long[, paste0("interval", j)] <- rep(c(rep(0, j - 1), 1, rep(0, length(cut.time) - j)), nrow(X.all))
++ }
+> X.long <- as.matrix(X.long)
+> ratemat <- matrix(X.long[, c("treat", cov.names, interval.names)] %*% 
++                     mu2[c("treat", cov.names, interval.names)], 
++                   ncol = length(cut.time), byrow = T)
+> ratemat2 <- matrix(rep(theta2, nrow(X.all)), ncol = length(cut.time), byrow = T)
+> 
+> # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+> for(idx_outer in 1:idx_samp){ # number of simulations (i.e. RCT and external data generated)
++   # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
++   set.seed(23 * as.integer(idx_scale*idx_samp + idx_outer))  #  05-19-2020
++   trt.idx  <- sample(which(X.all$treat == 1), trt_n)
++   ctrl.idx <- sample(which(X.all$treat == 0 & X.all$external == 0), ctrl_n)
++   # h.idx    <- sample(which(X.all$external == 1), h_n)
++   # h.ecog.idx <- is.na(X.all[h.idx, "ecog" ]) # length h.idx
++   h.idx <- 1:h_n
++   h.ecog.idx <- h.idx
++   
++   t.sim <- 
++     rpwexp(n = trt_n + ctrl_n + h_n,
++            time = cut.time,
++            rate = as.matrix(
++              exp(ratemat[c(trt.idx, ctrl.idx, h.idx), ] + 
++                    matrix(c(rep(0, trt_n + ctrl_n), rep(1, h_n)) * X3beta, ncol = 1) %*% 
++                    matrix(c(0, 1), ncol = length(cut.time), nrow = 1)))) # MAJOR ERROR 9/6/21
++                                                                          # ALWAYS CHECK 9/14/21
++   
++   
++   if (cen_vec[idx_scale] == 0){ # low censoring
++     # y.sim <- pmin(t.sim, tail(sort(t.sim))[1])
++     c.sim <- rpwexp(n = trt_n + ctrl_n + h_n,
++                     rate = as.matrix(exp(ratemat2[c(trt.idx, ctrl.idx, h.idx), ] * 1.4)),  # low censoring
++                     time = cut.time)
++     y.sim <- c(t.sim[1:(trt_n + ctrl_n)], pmin(t.sim, c.sim)[(trt_n + ctrl_n + 1):(trt_n + ctrl_n + h_n)])
++     nu.sim <- as.numeric(y.sim == t.sim)
++     
++     if (sum(nu.sim) == (trt_n + ctrl_n + h_n)){ ## redo if no external controls are censored
++       c.sim <- tail(sort(t.sim[(trt_n + ctrl_n + 1):(trt_n + ctrl_n + h_n)]))[1]
++       y.sim <- c(t.sim[1:(trt_n + ctrl_n)], pmin(t.sim, c.sim)[(trt_n + ctrl_n + 1):(trt_n + ctrl_n + h_n)])
++       nu.sim <- as.numeric(y.sim == t.sim) # equals 1 if observed 
++     }
++   }
++   if (cen_vec[idx_scale] == 1){ # high censoring 
++     c.sim <- rpwexp(n = trt_n + ctrl_n + h_n,
++                     rate = as.matrix(exp(ratemat2[c(trt.idx, ctrl.idx, h.idx), ] * 0.9)), # high censoring 
++                     time = cut.time)
++     y.sim <- c(t.sim[1:(trt_n + ctrl_n)], pmin(t.sim, c.sim)[(trt_n + ctrl_n + 1):(trt_n + ctrl_n + h_n)])
++     nu.sim <- as.numeric(y.sim == t.sim)
++   }
++   
++   # Simulated design matrix
++   sim.data           <- data.frame(rbind(cbind(t = y.sim, nu = nu.sim,
++                                                X.all[c(trt.idx, ctrl.idx, h.idx), 
++                                                      c("treat", "external", cov.names, "ecog")])))
++   # Add patient ID to sim.data
++   sim.data$id <- seq.int(nrow(sim.data))
++   # Reformat data using survSplit()
++   sim.split          <- survSplit(sim.data, cut = cut.time, end = "t", start = "t0", 
++                                   event = "nu", episode = "interval")
++   sim.split$interval <- factor(sim.split$interval - 1)
++   sim.split$expo     <- sim.split$t - sim.split$t0
++   
++   ########################################################################################################################################################################################################
++   # Add iptw
++   ps_formula <- formula(paste("1 - external ~", paste(cov.names, collapse=" + ")))
++   ps_fits <- glm(ps_formula,
++                  family = binomial(),
++                  data = sim.data)
++   ps <- predict(ps_fits, type = "response")
++   iptw_att <- ps / (1 - ps)
++   sim.data <- sim.data %>% dplyr::mutate(iptw_att = ifelse(external == 1, iptw_att, 1))
++   
++   ########################################################################################################################################################################################################
++   
++   # Fit model for historical events
++   if (n.seg >= 3){
++     sim.poisson <- glm(formula2_no_trt, 
++                        family = poisson(link = "log"), 
++                        data = sim.split[sim.split$external == 1, ])
++   } else {
++     sim.poisson <- glm(formula1_no_trt, 
++                        family = poisson(link = "log"), 
++                        data = sim.split[sim.split$external == 1, ])
++     names(sim.poisson$coefficients)[names(sim.poisson$coefficients) == "(Intercept)"] <- "interval1"
++   }
++   lambda <- mvrnorm(1, sim.poisson$coefficients[c(cov.names, interval.names)], 
++                     vcov(sim.poisson)[c(cov.names, interval.names), 
++                                       c(cov.names, interval.names)])
++   # Fit model for historical censoring
++   if (n.seg >= 3){
++     sim.poisson <- glm(1 - nu ~ interval + offset(log(expo)) - 1,
++                        family = poisson(link = "log"),
++                        data = sim.split[sim.split$external == 1, ])
++   } else {
++     sim.poisson <- glm(1 - nu ~ offset(log(expo)),
++                        family = poisson(link = "log"),
++                        sim.split[sim.split$external == 1, ])
++     names(sim.poisson$coefficients)[names(sim.poisson$coefficients) == "(Intercept)"] <- "interval1"
++   }
++   theta <- mvrnorm(1, sim.poisson$coefficients[interval.names],
++                    vcov(sim.poisson)[interval.names, interval.names])
++   
++   # Fit model for RCT events
++   if (n.seg >= 3){
++     sim.poisson.lambda <- glm(formula2,
++                               family = poisson(link = "log"), 
++                               data = sim.split[sim.split$external == 0, ])
++   } else {
++     sim.poisson.lambda <- glm(formula1,
++                               family = poisson(link = "log"), 
++                               data = sim.split[sim.split$external == 0, ])
++     names(sim.poisson.lambda$coefficients)[names(sim.poisson.lambda$coefficients) == "(Intercept)"] <- "interval1"
++   }
++   # Fit model for historical censoring
++   if (n.seg >= 3){
++     sim.poisson.theta   <- glm(1 - nu ~ interval + offset(log(expo)) - 1,
++                                family = poisson(link = "log"),
++                                data = sim.split[sim.split$external == 1, ])
++   } else {
++     sim.poisson.theta   <- glm(1 - nu ~ offset(log(expo)),
++                                family = poisson(link = "log"),
++                                data = sim.split[sim.split$external == 1, ])
++     names(sim.poisson.theta$coefficients)[names(sim.poisson.theta$coefficients) == "(Intercept)"] <- "interval1"
++   }
++   
++   ########################################################################################################################################################################################################
++   
++   innermost  <- matrix(NA, nrow = idx_n, ncol = length(names))
++   colnames(innermost) <- names
++   a0.outer <- matrix(NA, nrow = nrow(sim.split[sim.split$external == 1, ]), ncol = idx_n)
++   
++   # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
++   for(idx in 1:idx_n){ # repetitions per design (i.e. number of imputations per exposure time interval in external controls)
++     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
++     
++     sim.split.idx <- sim.split # 8/3/21
++     
++     # Add imputation for multiple intervals in historical controls
++     if (n.seg >= 3){ 
++       for (i in which(sim.split.idx$external == 1)){
++         for(j in 1:length(inner.t)){
++           if (sim.split.idx$nu[i] == 0 & sim.split.idx$interval[i] == j & sim.split.idx$expo[i] == diff[j]){
++             temp.t <- rexp(1, rate = exp(as.matrix(sim.split.idx[i, c(cov.names)]) %*%
++                                            as.matrix(lambda[c(cov.names)]) + 
++                                            lambda[paste0("interval", j)]))
++             temp.c  <- rexp(1, rate = exp(theta[paste0("interval", j)]))
++             temp.y  <- pmin(temp.t, temp.c)
++             temp.nu <- as.numeric(temp.y == temp.t)
++             sim.split.idx$expo[i] <- diff[j] + temp.y
++             sim.split.idx$nu[i]   <- temp.nu
++           }
++         }
++       }
++     }
++     
++     # subset to historical only
++     sim.split.h <- sim.split.idx[sim.split.idx$external == 1, ]
++     
++     box.p.log <- matrix(NA, ncol = idx_a0_n, nrow = nrow(sim.split.h))
++     # repetitions per a0 (i.e. number of compatibility scores computed per exposure time interval)
++     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
++     for (idx_a0 in 1:idx_a0_n){
++       # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
++       lambda <- mvrnorm(1, sim.poisson.lambda$coefficients[c(cov.names, interval.names)], 
++                         vcov(sim.poisson.lambda)[c(cov.names, interval.names), 
++                                                  c(cov.names, interval.names)])
++       theta <- mvrnorm(1, sim.poisson.theta$coefficients[interval.names],
++                        vcov(sim.poisson.theta)[interval.names, interval.names])
++       # debugging code - prevent theta from being positive
++       for (i in 1:length(theta)){
++         if (theta[i] > 0) theta[i] <- min(theta)
++       }
++       
++       # generate y.h.pred incorporating variability in estimating lambda and assess compatibility, use interval + expo
++       for(i in 1:nrow(sim.split.h)){
++         j <- c(sim.split.h[i, "interval"])
++         y.h.pred <- rexp(1E4, rate = exp(as.matrix(sim.split.h[i, c(cov.names)]) %*%
++                                            as.matrix(lambda[c(cov.names)]) +
++                                            lambda[paste0("interval", j)]) +
++                            exp(theta[paste0("interval", j)]))
++         fhat_outer         <- kde(log(y.h.pred))
++         fhat_predict_outer <- predict(fhat_outer, x = log(y.h.pred))
++         box.p.log[i, idx_a0] <- mean(fhat_predict_outer <= predict(fhat_outer, x = log(sim.split.h$expo[i])))
++       }
++       # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
++     } # end for (idx_a0 in 1:idx_a0_n)
++     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
++     ## Compute case-specific weights
++     a0 <- rowMeans(box.p.log)
++     a0.outer[, idx] <- a0
++     sim.split.h$a0 <- a0
++     # Compute average weights a0 overall and by ecog score
++     innermost[idx, "mean_a0"] <- mean(a0)
++     innermost[idx, c("a0_mean_q0.1", "a0_mean_q0.25", "a0_mean_q0.5", "a0_mean_q0.75", "a0_mean_q0.9")] <- quantile(a0, probs = c(0.1, 0.25, 0.5, 0.75, 0.9))
++     innermost[idx, "a0_wt_ecog0"] <- mean(sim.split.h[sim.split.h[,"ecog"] %in% 0, "a0"])
++     innermost[idx, "a0_wt_ecog1"] <- mean(sim.split.h[sim.split.h[,"ecog"] %in% 1, "a0"])
++     innermost[idx, "a0_wt_ecogNA"] <- mean(sim.split.h[is.na(sim.split.h[,"ecog"]), "a0"])
++     innermost[idx, "a0_wt_obs"] <- mean(sim.split.h[sim.split.h$nu == 1, "a0"])
++     innermost[idx, "a0_wt_cen"] <- mean(sim.split.h[sim.split.h$nu == 0, "a0"])
++     # Compute average weights a0 by interval, and by ecog and interval combination
++     for (i1 in c(0, 1)){
++       for (j1 in 1:(n.seg - 1)){
++         innermost[idx, paste0("a0_wts_", i1, "_", j1)] <- 
++           mean(sim.split.h[sim.split.h[,"ecog"] %in% i1 & sim.split.h[,"interval"] == j1, "a0"])
++       }
++     }
++     for (j1 in 1:(n.seg - 1)){
++       innermost[idx, paste0("a0_wts_", 2, "_", j1)] <-  mean(sim.split.h[is.na(sim.split.h[,"ecog"]) & sim.split.h[,"interval"] == j1, "a0"])
++       innermost[idx, paste0("a0_wt_int", j1)] <- mean(sim.split.h[sim.split.h[,"interval"] == j1, "a0"])
++       innermost[idx, paste0("a0_wt_int", j1, c("_q0.1", "_q0.25", "_q0.5", "_q0.75", "_q0.9"))] <- quantile(sim.split.h[sim.split.h[,"interval"] == j1, "a0"], probs = c(0.1, 0.25, 0.5, 0.75, 0.9))
++     }
++     
++     # Final analysis for adaptive weights a0_v1
++     wts <- c(rep(1, times = sum(sim.split.idx$external == 0)), a0)
++     if (n.seg >= 3){
++       sim.poisson <- glm(formula2,
++                          family = poisson(link = "log"),
++                          data = sim.split.idx,
++                          weights = wts)
++     } else {
++       sim.poisson <- glm(formula1,
++                          family = poisson(link = "log"),
++                          data = sim.split.idx,
++                          weights = wts)
++     }
++     innermost[idx, paste0(c("HR_", "lower_", "upper_"), "a0_v1")] <-
++       c(exp(coef(sim.poisson))["treat"],
++         exp(coef(sim.poisson)["treat"])*exp(-1.96*summary(sim.poisson)$coefficients["treat", 2]),
++         exp(coef(sim.poisson)["treat"])*exp(1.96*summary(sim.poisson)$coefficients["treat", 2]))
++     
++     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
++   } # ends for(idx in 1:idx_n) # repetitions per design (i.e. number of imputations per exposure time interval in external controls)
++   # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
++   
++   #  For each idx_scale and idx_sample, summarize data from idx_n repeats
++   innermost <- data.frame(innermost)
++   innermost$bias_a0 <- (innermost$HR_a0 - exp(mu2["treat"])) # BIAS
++   # Compute MSE, HR, credible interval width, and power for "a0_v1"
++   innermost[[paste0("MSE_", "a0_v1")]]      <- 
++     (innermost[[paste0("HR_", "a0_v1")]] - exp(mu2["treat"])) ^ 2
++   innermost[[paste0("CI_width_", "a0_v1")]] <- 
++     (innermost[[paste0("upper_", "a0_v1")]] - innermost[[paste0("lower_", "a0_v1")]])
++   innermost[[paste0("CI_", "a0_v1")]]       <- 
++     (innermost[[paste0("lower_", "a0_v1")]] < exp(mu2["treat"]) & 
++        exp(mu2["treat"]) < innermost[[paste0("upper_", "a0_v1")]])
++   innermost[[paste0("power_", "a0_v1")]]    <- 
++     ((innermost[[paste0("lower_", "a0_v1")]] < 1 & innermost[[paste0("upper_", "a0_v1")]] < 1) 
++      # | (innermost[[paste0("lower_", "a0_v1")]] > 1 & innermost[[paste0("upper_", "a0_v1")]] > 1)
++     )
++   
++   outermost[idx_outer, ] <- colMeans(innermost)
++   
++   # Final analysis using fixed power prior weights & adaptive weights
++   for (i in 1:length(ppList)){
++     if (ppList[i] == "a0"){
++       wts <- c(rep(1, times = sum(sim.split$external == 0)), rowMeans(a0.outer))
++     } else if (substring(ppList[i], 1, 1) == "q"){
++       wts <- c(rep(1, times = sum(sim.split$external == 0)), 
++                rotate2(rowMeans(a0.outer), as.numeric(substring(ppList[i], 2, 5)), 0) * 
++                  g(2 * mean(a0.outer), as.numeric(substring(ppList[i], 9, 13))))
++     } else if (substring(ppList[i], 1, 1) == "e"){
++       wts <- c(rep(1, times = sum(sim.split$external == 0)), 
++                rotate(rowMeans(a0.outer), 0, as.numeric(substring(ppList[i], 2, 5))) * 
++                  g(2 * mean(a0.outer), as.numeric(substring(ppList[i], 9, 13))))
++     } else {
++       wts <- c(rep(1, times = sum(sim.split$external == 0)), rep(as.numeric(ppList[i]), sum(sim.split$external == 1)))
++     }
++     if (n.seg >= 3){
++       sim.poisson <- glm(formula2,
++                          family = poisson(link = "log"),
++                          data = sim.split,
++                          weights = wts)
++     } else {
++       sim.poisson <- glm(formula1,
++                          family = poisson(link = "log"),
++                          data = sim.split,
++                          weights = wts)
++     }
++     outermost[idx_outer, paste0(c("HR_", "lower_", "upper_"), ppList[i])] <-
++       c(exp(coef(sim.poisson))["treat"],
++         exp(coef(sim.poisson)["treat"])*exp(-1.96*summary(sim.poisson)$coefficients["treat", 2]),
++         exp(coef(sim.poisson)["treat"])*exp(1.96*summary(sim.poisson)$coefficients["treat", 2]))
++     if (ppList[i] == "a0"){
++       outermost[idx_outer, "a0_logHR"] <- coef(sim.poisson)["treat"]
++       outermost[idx_outer, "SE_a0"] <- summary(sim.poisson)$coefficients["treat", 2]
++     }
++   }
++   
++   # # Final analysis using frailty model
++   # f_formula <- formula(paste("Surv(t, nu) ~ treat + frailty(external) +",
++   #                            paste(cov.names, collapse=" + ")))
++   # coxf <- tryCatch(coxph(f_formula, data = sim.data),
++   #                  error = function(e) coxph(f_formula, data = sim.data))
++   # outermost[idx_outer, c("HR_f", "lower_f", "upper_f", paste0(cov.names, "_f"))] <-
++   #   c(exp(coef(coxf))["treat"],
++   #     exp(coef(coxf)["treat"])*exp(-1.96*summary(coxf)$coefficients["treat", "se(coef)"]),
++   #     exp(coef(coxf)["treat"])*exp(1.96*summary(coxf)$coefficients["treat", "se(coef)"]),
++   #     summary(coxf)$coefficients[cov.names, "coef"])
++   
++   # Final analysis using cox model
++   cox_formula <- formula(paste("Surv(t, nu) ~ treat + ", paste(cov.names, collapse=" + ")))
++   cox <- coxph(cox_formula, data = sim.data[sim.data$external == 0, ])
++   outermost[idx_outer, c("HR_cox", "lower_cox", "upper_cox", paste0(cov.names, "_cox"))] <-
++     c(exp(coef(cox))["treat"],
++       exp(coef(cox)["treat"])*exp(-1.96*summary(cox)$coefficients["treat", "se(coef)"]),
++       exp(coef(cox)["treat"])*exp(1.96*summary(cox)$coefficients["treat", "se(coef)"]),
++       summary(cox)$coefficients[cov.names, "coef"])
++   
++   # Final analysis using iptw
++   iptw_formula <-  formula(paste("Surv(t, nu) ~ treat + cluster(id) + ", paste(cov.names, collapse=" + ")))
++   iptw <- coxph(iptw_formula, 
++                 data = sim.data,
++                 weights = iptw_att)
++   outermost[idx_outer, c("HR_iptw", "lower_iptw", "upper_iptw", paste0(cov.names, "_iptw"))] <-
++     c(exp(coef(iptw))["treat"],
++       exp(coef(iptw)["treat"])*exp(-1.96*summary(iptw)$coefficients["treat", "robust se"]),
++       exp(coef(iptw)["treat"])*exp(1.96*summary(iptw)$coefficients["treat", "robust se"]),
++       summary(iptw)$coefficients[cov.names, "coef"])
++   
++   # Final analysis using commensurate priors
++   if (run_com == TRUE){ 
++     
++     survival.dat <- list(
++       N = nrow(sim.split),
++       nu = sim.split$nu,
++       trt = sim.split$treat,
++       X1 = sim.split$age,
++       X2 = sim.split$sex2,
++       a0 = c(rep(1, times = sum(sim.split$external == 0)), a0), # 8/28/21
++       offset = log(sim.split$expo),
++       int_d_1 = as.numeric(sim.split$interval == 1),
++       int_d_2 = as.numeric(sim.split$interval == 2),
++       E = as.numeric(sim.split$external == 0)
++     )
++     
++     skip_to_next <- FALSE
++     file <- "com_cauchy.stan"
++     mod <- cmdstan_model(file, pedantic = TRUE)
++     tryCatch(fit_com_cauchy <- mod$sample(
++       data = survival.dat,
++       seed = as.integer(idx_scale*idx_samp + idx_outer),
++       chains = 2,
++       parallel_chains = 2,
++       refresh = 0,
++       iter_warmup = 500,
++       iter_sampling = 2500
++     ), error = function(e) {skip_to_next <<- TRUE})
++     
++     if (skip_to_next == FALSE){
++       res_com_cauchy <- fit_com_cauchy$summary("gamma", "mean", sig = ~ mean(. <= 0))
++       outermost[idx_outer, c("HR_com_cauchy")] <- as.numeric(exp(res_com_cauchy["mean"]))
++       outermost[idx_outer, c("power_com_cauchy")] <- as.numeric(res_com_cauchy["sig"] > 0.975)
++       outermost[idx_outer, c("MSE_com_cauchy")] <- (outermost[idx_outer, c("HR_com_cauchy")] - exp(mu2["treat"])) ^ 2
++     }
++     
++     skip_to_next <- FALSE
++     file <- "com_a0.stan"
++     mod <- cmdstan_model(file, pedantic = TRUE)
++     tryCatch(fit_com_a0 <- mod$sample(
++       data = survival.dat,
++       seed = as.integer(idx_scale*idx_samp + idx_outer),
++       chains = 2,
++       parallel_chains = 2,
++       refresh = 0,
++       iter_warmup = 500,
++       iter_sampling = 2500
++     ), error = function(e) {skip_to_next <<- TRUE})
++     
++     if (skip_to_next == FALSE){
++       res_com_a0 <- fit_com_a0$summary("gamma", "mean", sig = ~ mean(. <= 0))
++       outermost[idx_outer, c("HR_com_a0")] <- as.numeric(exp(res_com_a0["mean"]))
++       outermost[idx_outer, c("power_com_a0")] <- as.numeric(res_com_a0["sig"] > 0.975)
++       outermost[idx_outer, c("MSE_com_a0")] <- (outermost[idx_outer, c("HR_com_a0")] - exp(mu2["treat"])) ^ 2
++     }
++     
++   } # end commensurate prior
++   
++   ########################################################################################################################################################################################################
++   
++   # Compute MSE, HR, credible interval width, and power for each analysis method
++   for (i in 1:length(nList)){
++     outermost[, paste0("MSE_", nList[i])]      <- 
++       (outermost[, paste0("HR_", nList[i])] - exp(mu2["treat"])) ^ 2
++     outermost[, paste0("CI_width_", nList[i])] <- 
++       (outermost[, paste0("upper_", nList[i])] - outermost[, paste0("lower_", nList[i])])
++     outermost[, paste0("CI_", nList[i])]       <- 
++       (outermost[, paste0("lower_", nList[i])] < exp(mu2["treat"]) & 
++          exp(mu2["treat"]) < outermost[, paste0("upper_", nList[i])])
++     outermost[, paste0("power_", nList[i])]    <- 
++       ((outermost[, paste0("lower_", nList[i])] < 1 & outermost[, paste0("upper_", nList[i])] < 1) 
++        # | (outermost[, paste0("lower_", nList[i])] > 1 & outermost[, paste0("upper_", nList[i])] > 1)
++       )
++   }
++   
++   outermost[idx_outer, "nu_trt"]  <- sum(sim.data$nu[sim.data$treat == 1 & sim.data$external == 0])
++   outermost[idx_outer, "nu_ctrl"] <- sum(sim.data$nu[sim.data$treat == 0 & sim.data$external == 0])
++   outermost[idx_outer, "nu_h"]    <- sum(sim.data$nu[sim.data$treat == 0 & sim.data$external == 1])
++   outermost[idx_outer, "T1E"]     <- T1E_vec[idx_scale] 
++   
++   outer_a0[1:length(a0), idx_outer] <- a0
++   print(idx_outer)
++   # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
++ } # ends for(idx_outer in 1:idx_samp)
+[1] 1
+[1] 2
+[1] 3
+[1] 4
+[1] 5
+[1] 6
+[1] 7
+[1] 8
+[1] 9
+[1] 10
+[1] 11
+[1] 12
+[1] 13
+[1] 14
+[1] 15
+[1] 16
+[1] 17
+[1] 18
+[1] 19
+[1] 20
+[1] 21
+[1] 22
+[1] 23
+[1] 24
+[1] 25
+[1] 26
+[1] 27
+[1] 28
+[1] 29
+[1] 30
+[1] 31
+[1] 32
+[1] 33
+[1] 34
+[1] 35
+[1] 36
+[1] 37
+[1] 38
+[1] 39
+[1] 40
+[1] 41
+[1] 42
+[1] 43
+[1] 44
+[1] 45
+[1] 46
+[1] 47
+[1] 48
+[1] 49
+[1] 50
+[1] 51
+[1] 52
+[1] 53
+[1] 54
+[1] 55
+[1] 56
+[1] 57
+[1] 58
+[1] 59
+[1] 60
+[1] 61
+[1] 62
+[1] 63
+[1] 64
+[1] 65
+[1] 66
+[1] 67
+[1] 68
+[1] 69
+[1] 70
+[1] 71
+[1] 72
+[1] 73
+[1] 74
+[1] 75
+[1] 76
+[1] 77
+[1] 78
+[1] 79
+[1] 80
+[1] 81
+[1] 82
+[1] 83
+[1] 84
+[1] 85
+[1] 86
+[1] 87
+[1] 88
+[1] 89
+[1] 90
+[1] 91
+[1] 92
+[1] 93
+[1] 94
+[1] 95
+[1] 96
+[1] 97
+[1] 98
+[1] 99
+[1] 100
+[1] 101
+[1] 102
+[1] 103
+[1] 104
+[1] 105
+[1] 106
+[1] 107
+[1] 108
+[1] 109
+[1] 110
+[1] 111
+[1] 112
+[1] 113
+[1] 114
+[1] 115
+[1] 116
+[1] 117
+[1] 118
+[1] 119
+[1] 120
+[1] 121
+[1] 122
+[1] 123
+[1] 124
+[1] 125
+[1] 126
+[1] 127
+[1] 128
+[1] 129
+[1] 130
+[1] 131
+[1] 132
+[1] 133
+[1] 134
+[1] 135
+[1] 136
+[1] 137
+[1] 138
+[1] 139
+[1] 140
+[1] 141
+[1] 142
+[1] 143
+[1] 144
+[1] 145
+[1] 146
+[1] 147
+[1] 148
+[1] 149
+[1] 150
+[1] 151
+[1] 152
+[1] 153
+[1] 154
+[1] 155
+[1] 156
+[1] 157
+[1] 158
+[1] 159
+[1] 160
+[1] 161
+[1] 162
+[1] 163
+[1] 164
+[1] 165
+[1] 166
+[1] 167
+[1] 168
+[1] 169
+[1] 170
+[1] 171
+[1] 172
+[1] 173
+[1] 174
+[1] 175
+[1] 176
+[1] 177
+[1] 178
+[1] 179
+[1] 180
+[1] 181
+[1] 182
+[1] 183
+[1] 184
+[1] 185
+[1] 186
+[1] 187
+[1] 188
+[1] 189
+[1] 190
+[1] 191
+[1] 192
+[1] 193
+[1] 194
+[1] 195
+[1] 196
+[1] 197
+[1] 198
+[1] 199
+[1] 200
+[1] 201
+[1] 202
+[1] 203
+[1] 204
+[1] 205
+[1] 206
+[1] 207
+[1] 208
+[1] 209
+[1] 210
+[1] 211
+[1] 212
+[1] 213
+[1] 214
+[1] 215
+[1] 216
+[1] 217
+[1] 218
+[1] 219
+[1] 220
+[1] 221
+[1] 222
+[1] 223
+[1] 224
+[1] 225
+[1] 226
+[1] 227
+[1] 228
+[1] 229
+[1] 230
+[1] 231
+[1] 232
+[1] 233
+[1] 234
+[1] 235
+[1] 236
+[1] 237
+[1] 238
+[1] 239
+[1] 240
+[1] 241
+[1] 242
+[1] 243
+[1] 244
+[1] 245
+[1] 246
+[1] 247
+[1] 248
+[1] 249
+[1] 250
+[1] 251
+[1] 252
+[1] 253
+[1] 254
+[1] 255
+[1] 256
+[1] 257
+[1] 258
+[1] 259
+[1] 260
+[1] 261
+[1] 262
+[1] 263
+[1] 264
+[1] 265
+[1] 266
+[1] 267
+[1] 268
+[1] 269
+[1] 270
+[1] 271
+[1] 272
+[1] 273
+[1] 274
+[1] 275
+[1] 276
+[1] 277
+[1] 278
+[1] 279
+[1] 280
+[1] 281
+[1] 282
+[1] 283
+[1] 284
+[1] 285
+[1] 286
+[1] 287
+[1] 288
+[1] 289
+[1] 290
+[1] 291
+[1] 292
+[1] 293
+[1] 294
+[1] 295
+[1] 296
+[1] 297
+[1] 298
+[1] 299
+[1] 300
+[1] 301
+[1] 302
+[1] 303
+[1] 304
+[1] 305
+[1] 306
+[1] 307
+[1] 308
+[1] 309
+[1] 310
+[1] 311
+[1] 312
+[1] 313
+[1] 314
+[1] 315
+[1] 316
+[1] 317
+[1] 318
+[1] 319
+[1] 320
+[1] 321
+[1] 322
+[1] 323
+[1] 324
+[1] 325
+[1] 326
+[1] 327
+[1] 328
+[1] 329
+[1] 330
+[1] 331
+[1] 332
+[1] 333
+[1] 334
+[1] 335
+[1] 336
+[1] 337
+[1] 338
+[1] 339
+[1] 340
+[1] 341
+[1] 342
+[1] 343
+[1] 344
+[1] 345
+[1] 346
+[1] 347
+[1] 348
+[1] 349
+[1] 350
+[1] 351
+[1] 352
+[1] 353
+[1] 354
+[1] 355
+[1] 356
+[1] 357
+[1] 358
+[1] 359
+[1] 360
+[1] 361
+[1] 362
+[1] 363
+[1] 364
+[1] 365
+[1] 366
+[1] 367
+[1] 368
+[1] 369
+[1] 370
+[1] 371
+[1] 372
+[1] 373
+[1] 374
+[1] 375
+[1] 376
+[1] 377
+[1] 378
+[1] 379
+[1] 380
+[1] 381
+[1] 382
+[1] 383
+[1] 384
+[1] 385
+[1] 386
+[1] 387
+[1] 388
+[1] 389
+[1] 390
+[1] 391
+[1] 392
+[1] 393
+[1] 394
+[1] 395
+[1] 396
+[1] 397
+[1] 398
+[1] 399
+[1] 400
+[1] 401
+[1] 402
+[1] 403
+[1] 404
+[1] 405
+[1] 406
+[1] 407
+[1] 408
+[1] 409
+[1] 410
+[1] 411
+[1] 412
+[1] 413
+[1] 414
+[1] 415
+[1] 416
+[1] 417
+> # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+> 
+> outermost[, "scale"]   <- scale_list[idx_scale]  # scale
+> if (save_a0 == TRUE){ 
++   write.csv(outer_a0, paste0("../output - a0/",  formatC(idx_scale, width=4, flag="0"), ".csv"))
++   # write.csv(outer_a0, paste0("../output-a0/",  formatC(idx_scale, width=4, flag="0"), ".csv"))
++ }
+> write.csv(c(colMeans(outermost)), paste0("../output/",  formatC(idx_scale, width=4, flag="0"), ".csv"))
+> 
+> proc.time() - ptm
+    user   system  elapsed 
+7826.811   28.600 7884.978 
+> 
+> # }
+> 
+> proc.time()
+    user   system  elapsed 
+7828.799   28.788 7887.225 

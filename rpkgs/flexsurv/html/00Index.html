@@ -1,0 +1,572 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>R: Flexible Parametric Survival and Multi-State Models</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+<h1> Flexible Parametric Survival and Multi-State Models
+<img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
+</h1>
+<hr/>
+<div style="text-align: center;">
+<a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
+<a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
+</div><h2>Documentation for package &lsquo;flexsurv&rsquo; version 2.0</h2>
+
+<ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
+<li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
+<li><a href="../NEWS">Package NEWS</a>.</li>
+</ul>
+
+<h2>Help Pages</h2>
+
+
+<p style="text-align: center;">
+<a href="# "> </a>
+<a href="#A">A</a>
+<a href="#B">B</a>
+<a href="#C">C</a>
+<a href="#D">D</a>
+<a href="#F">F</a>
+<a href="#G">G</a>
+<a href="#H">H</a>
+<a href="#L">L</a>
+<a href="#M">M</a>
+<a href="#N">N</a>
+<a href="#P">P</a>
+<a href="#Q">Q</a>
+<a href="#R">R</a>
+<a href="#S">S</a>
+<a href="#T">T</a>
+<a href="#U">U</a>
+<a href="#W">W</a>
+<a href="#misc">misc</a>
+</p>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="flexsurv-package.html">flexsurv-package</a></td>
+<td>flexsurv: Flexible parametric survival and multi-state models</td></tr>
+</table>
+
+<h2><a name="A">-- A --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="ajfit.html">ajfit</a></td>
+<td>Aalen-Johansen nonparametric estimates comparable to a fitted flexsurvmix model</td></tr>
+<tr><td style="width: 25%;"><a href="ajfit_flexsurvmix.html">ajfit_flexsurvmix</a></td>
+<td>Forms a tidy data frame for plotting the fit of parametric mixture multi-state models against nonparametric estimates</td></tr>
+<tr><td style="width: 25%;"><a href="ajfit_fmsm.html">ajfit_fmsm</a></td>
+<td>Check the fit of Markov flexible parametric multi-state models against nonparametric estimates.</td></tr>
+<tr><td style="width: 25%;"><a href="augment.flexsurvreg.html">augment.flexsurvreg</a></td>
+<td>Augment data with information from a flexsurv model object</td></tr>
+</table>
+
+<h2><a name="B">-- B --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="basis.html">basis</a></td>
+<td>Natural cubic spline basis</td></tr>
+<tr><td style="width: 25%;"><a href="bc.html">bc</a></td>
+<td>Breast cancer survival data</td></tr>
+<tr><td style="width: 25%;"><a href="bootci.fmsm.html">bootci.fmsm</a></td>
+<td>Bootstrap confidence intervals for flexsurv output functions</td></tr>
+<tr><td style="width: 25%;"><a href="bos.html">bos</a></td>
+<td>Bronchiolitis obliterans syndrome after lung transplants</td></tr>
+<tr><td style="width: 25%;"><a href="bos.html">bosms3</a></td>
+<td>Bronchiolitis obliterans syndrome after lung transplants</td></tr>
+<tr><td style="width: 25%;"><a href="bos.html">bosms4</a></td>
+<td>Bronchiolitis obliterans syndrome after lung transplants</td></tr>
+</table>
+
+<h2><a name="C">-- C --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="coef.flexsurvreg.html">coef.flexsurvreg</a></td>
+<td>Extract model coefficients from fitted flexible survival models</td></tr>
+</table>
+
+<h2><a name="D">-- D --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="basis.html">dbasis</a></td>
+<td>Natural cubic spline basis</td></tr>
+<tr><td style="width: 25%;"><a href="basis.html">dfss</a></td>
+<td>Natural cubic spline basis</td></tr>
+<tr><td style="width: 25%;"><a href="GenF.html">dgenf</a></td>
+<td>Generalized F distribution</td></tr>
+<tr><td style="width: 25%;"><a href="GenF.orig.html">dgenf.orig</a></td>
+<td>Generalized F distribution (original parameterisation)</td></tr>
+<tr><td style="width: 25%;"><a href="GenGamma.html">dgengamma</a></td>
+<td>Generalized gamma distribution</td></tr>
+<tr><td style="width: 25%;"><a href="GenGamma.orig.html">dgengamma.orig</a></td>
+<td>Generalized gamma distribution (original parameterisation)</td></tr>
+<tr><td style="width: 25%;"><a href="Gompertz.html">dgompertz</a></td>
+<td>The Gompertz distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Llogis.html">dllogis</a></td>
+<td>The log-logistic distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Survspline.html">dsurvspline</a></td>
+<td>Royston/Parmar spline survival distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">dsurvspline0</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">dsurvspline1</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">dsurvspline2</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">dsurvspline3</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">dsurvspline4</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">dsurvspline5</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">dsurvspline6</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">dsurvspline7</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="WeibullPH.html">dweibullPH</a></td>
+<td>Weibull distribution in proportional hazards parameterisation</td></tr>
+</table>
+
+<h2><a name="F">-- F --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="flexsurv-package.html">flexsurv</a></td>
+<td>flexsurv: Flexible parametric survival and multi-state models</td></tr>
+<tr><td style="width: 25%;"><a href="flexsurvreg.html">flexsurv.dists</a></td>
+<td>Flexible parametric regression for time-to-event data</td></tr>
+<tr><td style="width: 25%;"><a href="flexsurvmix.html">flexsurvmix</a></td>
+<td>Flexible parametric mixture models for times to competing events</td></tr>
+<tr><td style="width: 25%;"><a href="flexsurvreg.html">flexsurvreg</a></td>
+<td>Flexible parametric regression for time-to-event data</td></tr>
+<tr><td style="width: 25%;"><a href="flexsurvrtrunc.html">flexsurvrtrunc</a></td>
+<td>Flexible parametric models for right-truncated, uncensored data defined by times of initial and final events.</td></tr>
+<tr><td style="width: 25%;"><a href="flexsurvspline.html">flexsurvspline</a></td>
+<td>Flexible survival regression using the Royston/Parmar spline model.</td></tr>
+<tr><td style="width: 25%;"><a href="fmixmsm.html">fmixmsm</a></td>
+<td>Constructor for a mixture multi-state model based on flexsurvmix</td></tr>
+<tr><td style="width: 25%;"><a href="fmsm.html">fmsm</a></td>
+<td>Construct a multi-state model from a set of parametric survival models</td></tr>
+<tr><td style="width: 25%;"><a href="basis.html">fss</a></td>
+<td>Natural cubic spline basis</td></tr>
+</table>
+
+<h2><a name="G">-- G --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="GenF.html">GenF</a></td>
+<td>Generalized F distribution</td></tr>
+<tr><td style="width: 25%;"><a href="GenF.orig.html">GenF.orig</a></td>
+<td>Generalized F distribution (original parameterisation)</td></tr>
+<tr><td style="width: 25%;"><a href="GenGamma.html">GenGamma</a></td>
+<td>Generalized gamma distribution</td></tr>
+<tr><td style="width: 25%;"><a href="GenGamma.orig.html">GenGamma.orig</a></td>
+<td>Generalized gamma distribution (original parameterisation)</td></tr>
+<tr><td style="width: 25%;"><a href="get_basepars.html">get_basepars</a></td>
+<td>Evaluate baseline time-to-event distribution parameters given covariate values in a flexsurvmix model</td></tr>
+<tr><td style="width: 25%;"><a href="glance.flexsurvreg.html">glance.flexsurvreg</a></td>
+<td>Glance at a flexsurv model object</td></tr>
+<tr><td style="width: 25%;"><a href="Gompertz.html">Gompertz</a></td>
+<td>The Gompertz distribution</td></tr>
+</table>
+
+<h2><a name="H">-- H --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="hazard.html">hazard</a></td>
+<td>Hazard and cumulative hazard functions</td></tr>
+<tr><td style="width: 25%;"><a href="hazard.html">Hexp</a></td>
+<td>Hazard and cumulative hazard functions</td></tr>
+<tr><td style="width: 25%;"><a href="hazard.html">hexp</a></td>
+<td>Hazard and cumulative hazard functions</td></tr>
+<tr><td style="width: 25%;"><a href="hazard.html">Hgamma</a></td>
+<td>Hazard and cumulative hazard functions</td></tr>
+<tr><td style="width: 25%;"><a href="hazard.html">hgamma</a></td>
+<td>Hazard and cumulative hazard functions</td></tr>
+<tr><td style="width: 25%;"><a href="GenF.html">Hgenf</a></td>
+<td>Generalized F distribution</td></tr>
+<tr><td style="width: 25%;"><a href="GenF.html">hgenf</a></td>
+<td>Generalized F distribution</td></tr>
+<tr><td style="width: 25%;"><a href="GenF.orig.html">Hgenf.orig</a></td>
+<td>Generalized F distribution (original parameterisation)</td></tr>
+<tr><td style="width: 25%;"><a href="GenF.orig.html">hgenf.orig</a></td>
+<td>Generalized F distribution (original parameterisation)</td></tr>
+<tr><td style="width: 25%;"><a href="GenGamma.html">Hgengamma</a></td>
+<td>Generalized gamma distribution</td></tr>
+<tr><td style="width: 25%;"><a href="GenGamma.html">hgengamma</a></td>
+<td>Generalized gamma distribution</td></tr>
+<tr><td style="width: 25%;"><a href="GenGamma.orig.html">Hgengamma.orig</a></td>
+<td>Generalized gamma distribution (original parameterisation)</td></tr>
+<tr><td style="width: 25%;"><a href="GenGamma.orig.html">hgengamma.orig</a></td>
+<td>Generalized gamma distribution (original parameterisation)</td></tr>
+<tr><td style="width: 25%;"><a href="Gompertz.html">Hgompertz</a></td>
+<td>The Gompertz distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Gompertz.html">hgompertz</a></td>
+<td>The Gompertz distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Llogis.html">Hllogis</a></td>
+<td>The log-logistic distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Llogis.html">hllogis</a></td>
+<td>The log-logistic distribution</td></tr>
+<tr><td style="width: 25%;"><a href="hazard.html">Hlnorm</a></td>
+<td>Hazard and cumulative hazard functions</td></tr>
+<tr><td style="width: 25%;"><a href="hazard.html">hlnorm</a></td>
+<td>Hazard and cumulative hazard functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survspline.html">Hsurvspline</a></td>
+<td>Royston/Parmar spline survival distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Survspline.html">hsurvspline</a></td>
+<td>Royston/Parmar spline survival distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">Hsurvspline0</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">hsurvspline0</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">Hsurvspline1</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">hsurvspline1</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">Hsurvspline2</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">hsurvspline2</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">Hsurvspline3</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">hsurvspline3</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">Hsurvspline4</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">hsurvspline4</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">Hsurvspline5</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">hsurvspline5</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">Hsurvspline6</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">hsurvspline6</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">Hsurvspline7</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">hsurvspline7</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="hazard.html">Hweibull</a></td>
+<td>Hazard and cumulative hazard functions</td></tr>
+<tr><td style="width: 25%;"><a href="hazard.html">hweibull</a></td>
+<td>Hazard and cumulative hazard functions</td></tr>
+<tr><td style="width: 25%;"><a href="WeibullPH.html">HweibullPH</a></td>
+<td>Weibull distribution in proportional hazards parameterisation</td></tr>
+<tr><td style="width: 25%;"><a href="WeibullPH.html">hweibullPH</a></td>
+<td>Weibull distribution in proportional hazards parameterisation</td></tr>
+</table>
+
+<h2><a name="L">-- L --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="lines.flexsurvreg.html">lines.flexsurvreg</a></td>
+<td>Add fitted flexible survival curves to a plot</td></tr>
+<tr><td style="width: 25%;"><a href="plot_survtrunc.html">lines.survrtrunc</a></td>
+<td>Plot nonparametric estimates of survival from right-truncated data.</td></tr>
+<tr><td style="width: 25%;"><a href="Llogis.html">Llogis</a></td>
+<td>The log-logistic distribution</td></tr>
+</table>
+
+<h2><a name="M">-- M --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="meanfinal_fmixmsm.html">meanfinal_fmixmsm</a></td>
+<td>Mean time to final state in a mixture multi-state model</td></tr>
+<tr><td style="width: 25%;"><a href="means.html">means</a></td>
+<td>Mean and restricted mean survival functions</td></tr>
+<tr><td style="width: 25%;"><a href="means.html">mean_exp</a></td>
+<td>Mean and restricted mean survival functions</td></tr>
+<tr><td style="width: 25%;"><a href="mean_flexsurvmix.html">mean_flexsurvmix</a></td>
+<td>Mean times to events from a flexsurvmix model</td></tr>
+<tr><td style="width: 25%;"><a href="means.html">mean_gamma</a></td>
+<td>Mean and restricted mean survival functions</td></tr>
+<tr><td style="width: 25%;"><a href="means.html">mean_genf</a></td>
+<td>Mean and restricted mean survival functions</td></tr>
+<tr><td style="width: 25%;"><a href="means.html">mean_genf.orig</a></td>
+<td>Mean and restricted mean survival functions</td></tr>
+<tr><td style="width: 25%;"><a href="means.html">mean_gengamma</a></td>
+<td>Mean and restricted mean survival functions</td></tr>
+<tr><td style="width: 25%;"><a href="means.html">mean_gengamma.orig</a></td>
+<td>Mean and restricted mean survival functions</td></tr>
+<tr><td style="width: 25%;"><a href="means.html">mean_gompertz</a></td>
+<td>Mean and restricted mean survival functions</td></tr>
+<tr><td style="width: 25%;"><a href="means.html">mean_llogis</a></td>
+<td>Mean and restricted mean survival functions</td></tr>
+<tr><td style="width: 25%;"><a href="means.html">mean_lnorm</a></td>
+<td>Mean and restricted mean survival functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survspline.html">mean_survspline</a></td>
+<td>Royston/Parmar spline survival distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">mean_survspline0</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">mean_survspline1</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">mean_survspline2</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">mean_survspline3</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">mean_survspline4</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">mean_survspline5</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">mean_survspline6</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">mean_survspline7</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="means.html">mean_weibull</a></td>
+<td>Mean and restricted mean survival functions</td></tr>
+<tr><td style="width: 25%;"><a href="means.html">mean_weibullPH</a></td>
+<td>Mean and restricted mean survival functions</td></tr>
+<tr><td style="width: 25%;"><a href="model.frame.flexsurvreg.html">model.frame.flexsurvreg</a></td>
+<td>Extract original data from 'flexsurvreg' objects.</td></tr>
+<tr><td style="width: 25%;"><a href="model.frame.flexsurvreg.html">model.matrix.flexsurvreg</a></td>
+<td>Extract original data from 'flexsurvreg' objects.</td></tr>
+<tr><td style="width: 25%;"><a href="msfit.flexsurvreg.html">msfit.flexsurvreg</a></td>
+<td>Cumulative intensity function for parametric multi-state models</td></tr>
+</table>
+
+<h2><a name="N">-- N --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="nobs.flexsurvreg.html">nobs.flexsurvreg</a></td>
+<td>Number of observations contributing to a fitted flexible survival model</td></tr>
+<tr><td style="width: 25%;"><a href="normboot.flexsurvreg.html">normboot.flexsurvreg</a></td>
+<td>Simulate from the asymptotic normal distribution of parameter estimates.</td></tr>
+</table>
+
+<h2><a name="P">-- P --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="pars.fmsm.html">pars.fmsm</a></td>
+<td>Transition-specific parameters in a flexible parametric multi-state model</td></tr>
+<tr><td style="width: 25%;"><a href="pfinal_fmsm.html">pfinal_fmsm</a></td>
+<td>Probabilities of final states in a flexible parametric competing risks model</td></tr>
+<tr><td style="width: 25%;"><a href="GenF.html">pgenf</a></td>
+<td>Generalized F distribution</td></tr>
+<tr><td style="width: 25%;"><a href="GenF.orig.html">pgenf.orig</a></td>
+<td>Generalized F distribution (original parameterisation)</td></tr>
+<tr><td style="width: 25%;"><a href="GenGamma.html">pgengamma</a></td>
+<td>Generalized gamma distribution</td></tr>
+<tr><td style="width: 25%;"><a href="GenGamma.orig.html">pgengamma.orig</a></td>
+<td>Generalized gamma distribution (original parameterisation)</td></tr>
+<tr><td style="width: 25%;"><a href="Gompertz.html">pgompertz</a></td>
+<td>The Gompertz distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Llogis.html">pllogis</a></td>
+<td>The log-logistic distribution</td></tr>
+<tr><td style="width: 25%;"><a href="plot.flexsurvreg.html">plot.flexsurvreg</a></td>
+<td>Plots of fitted flexible survival models</td></tr>
+<tr><td style="width: 25%;"><a href="plot_survtrunc.html">plot.survrtrunc</a></td>
+<td>Plot nonparametric estimates of survival from right-truncated data.</td></tr>
+<tr><td style="width: 25%;"><a href="pmatrix.fs.html">pmatrix.fs</a></td>
+<td>Transition probability matrix from a fully-parametric, time-inhomogeneous Markov multi-state model</td></tr>
+<tr><td style="width: 25%;"><a href="pmatrix.simfs.html">pmatrix.simfs</a></td>
+<td>Transition probability matrix from a fully-parametric, semi-Markov multi-state model</td></tr>
+<tr><td style="width: 25%;"><a href="ppath_fmixmsm.html">ppath_fmixmsm</a></td>
+<td>Probability of each pathway taken through a mixture multi-state model</td></tr>
+<tr><td style="width: 25%;"><a href="predict.flexsurvreg.html">predict.flexsurvreg</a></td>
+<td>Predictions from flexible survival models</td></tr>
+<tr><td style="width: 25%;"><a href="probs_flexsurvmix.html">probs_flexsurvmix</a></td>
+<td>Probabilities of competing events from a flexsurvmix model</td></tr>
+<tr><td style="width: 25%;"><a href="Survspline.html">psurvspline</a></td>
+<td>Royston/Parmar spline survival distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">psurvspline0</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">psurvspline1</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">psurvspline2</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">psurvspline3</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">psurvspline4</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">psurvspline5</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">psurvspline6</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">psurvspline7</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="WeibullPH.html">pweibullPH</a></td>
+<td>Weibull distribution in proportional hazards parameterisation</td></tr>
+<tr><td style="width: 25%;"><a href="p_flexsurvmix.html">p_flexsurvmix</a></td>
+<td>Transition probabilities from a flexsurvmix model</td></tr>
+</table>
+
+<h2><a name="Q">-- Q --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="qfinal_fmixmsm.html">qfinal_fmixmsm</a></td>
+<td>Quantiles of the distribution of the time until reaching a final state in a mixture multi-state model</td></tr>
+<tr><td style="width: 25%;"><a href="qgeneric.html">qgeneric</a></td>
+<td>Generic function to find quantiles of a distribution</td></tr>
+<tr><td style="width: 25%;"><a href="GenF.html">qgenf</a></td>
+<td>Generalized F distribution</td></tr>
+<tr><td style="width: 25%;"><a href="GenF.orig.html">qgenf.orig</a></td>
+<td>Generalized F distribution (original parameterisation)</td></tr>
+<tr><td style="width: 25%;"><a href="GenGamma.html">qgengamma</a></td>
+<td>Generalized gamma distribution</td></tr>
+<tr><td style="width: 25%;"><a href="GenGamma.orig.html">qgengamma.orig</a></td>
+<td>Generalized gamma distribution (original parameterisation)</td></tr>
+<tr><td style="width: 25%;"><a href="Gompertz.html">qgompertz</a></td>
+<td>The Gompertz distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Llogis.html">qllogis</a></td>
+<td>The log-logistic distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Survspline.html">qsurvspline</a></td>
+<td>Royston/Parmar spline survival distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">qsurvspline0</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">qsurvspline1</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">qsurvspline2</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">qsurvspline3</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">qsurvspline4</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">qsurvspline5</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">qsurvspline6</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">qsurvspline7</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="quantile_flexsurvmix.html">quantile_flexsurvmix</a></td>
+<td>Quantiles of time-to-event distributions in a flexsurvmix model</td></tr>
+<tr><td style="width: 25%;"><a href="WeibullPH.html">qweibullPH</a></td>
+<td>Weibull distribution in proportional hazards parameterisation</td></tr>
+</table>
+
+<h2><a name="R">-- R --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="residuals.flexsurvreg.html">residuals.flexsurvreg</a></td>
+<td>Calculate residuals for flexible survival models</td></tr>
+<tr><td style="width: 25%;"><a href="GenF.html">rgenf</a></td>
+<td>Generalized F distribution</td></tr>
+<tr><td style="width: 25%;"><a href="GenF.orig.html">rgenf.orig</a></td>
+<td>Generalized F distribution (original parameterisation)</td></tr>
+<tr><td style="width: 25%;"><a href="GenGamma.html">rgengamma</a></td>
+<td>Generalized gamma distribution</td></tr>
+<tr><td style="width: 25%;"><a href="GenGamma.orig.html">rgengamma.orig</a></td>
+<td>Generalized gamma distribution (original parameterisation)</td></tr>
+<tr><td style="width: 25%;"><a href="Gompertz.html">rgompertz</a></td>
+<td>The Gompertz distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Llogis.html">rllogis</a></td>
+<td>The log-logistic distribution</td></tr>
+<tr><td style="width: 25%;"><a href="means.html">rmst_exp</a></td>
+<td>Mean and restricted mean survival functions</td></tr>
+<tr><td style="width: 25%;"><a href="rmst_flexsurvmix.html">rmst_flexsurvmix</a></td>
+<td>Restricted mean times to events from a flexsurvmix model</td></tr>
+<tr><td style="width: 25%;"><a href="means.html">rmst_gamma</a></td>
+<td>Mean and restricted mean survival functions</td></tr>
+<tr><td style="width: 25%;"><a href="rmst_generic.html">rmst_generic</a></td>
+<td>Generic function to find restricted mean survival of a distribution</td></tr>
+<tr><td style="width: 25%;"><a href="means.html">rmst_genf</a></td>
+<td>Mean and restricted mean survival functions</td></tr>
+<tr><td style="width: 25%;"><a href="means.html">rmst_genf.orig</a></td>
+<td>Mean and restricted mean survival functions</td></tr>
+<tr><td style="width: 25%;"><a href="means.html">rmst_gengamma</a></td>
+<td>Mean and restricted mean survival functions</td></tr>
+<tr><td style="width: 25%;"><a href="means.html">rmst_gengamma.orig</a></td>
+<td>Mean and restricted mean survival functions</td></tr>
+<tr><td style="width: 25%;"><a href="means.html">rmst_gompertz</a></td>
+<td>Mean and restricted mean survival functions</td></tr>
+<tr><td style="width: 25%;"><a href="means.html">rmst_llogis</a></td>
+<td>Mean and restricted mean survival functions</td></tr>
+<tr><td style="width: 25%;"><a href="means.html">rmst_lnorm</a></td>
+<td>Mean and restricted mean survival functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survspline.html">rmst_survspline</a></td>
+<td>Royston/Parmar spline survival distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">rmst_survspline0</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">rmst_survspline1</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">rmst_survspline2</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">rmst_survspline3</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">rmst_survspline4</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">rmst_survspline5</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">rmst_survspline6</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">rmst_survspline7</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="means.html">rmst_weibull</a></td>
+<td>Mean and restricted mean survival functions</td></tr>
+<tr><td style="width: 25%;"><a href="means.html">rmst_weibullPH</a></td>
+<td>Mean and restricted mean survival functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survspline.html">rsurvspline</a></td>
+<td>Royston/Parmar spline survival distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">rsurvspline0</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">rsurvspline1</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">rsurvspline2</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">rsurvspline3</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">rsurvspline4</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">rsurvspline5</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">rsurvspline6</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">rsurvspline7</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+<tr><td style="width: 25%;"><a href="WeibullPH.html">rweibullPH</a></td>
+<td>Weibull distribution in proportional hazards parameterisation</td></tr>
+</table>
+
+<h2><a name="S">-- S --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="sim.fmsm.html">sim.fmsm</a></td>
+<td>Simulate paths through a fully parametric semi-Markov multi-state model</td></tr>
+<tr><td style="width: 25%;"><a href="simfinal_fmsm.html">simfinal_fmsm</a></td>
+<td>Simulate and summarise final outcomes from a flexible parametric multi-state model</td></tr>
+<tr><td style="width: 25%;"><a href="simfs_bytrans.html">simfs_bytrans</a></td>
+<td>Reformat simulated multi-state data with one row per simulated transition</td></tr>
+<tr><td style="width: 25%;"><a href="simt_flexsurvmix.html">simt_flexsurvmix</a></td>
+<td>Simulate times to competing events from a mixture multi-state model</td></tr>
+<tr><td style="width: 25%;"><a href="summary.flexsurvreg.html">summary.flexsurvreg</a></td>
+<td>Summaries of fitted flexible survival models</td></tr>
+<tr><td style="width: 25%;"><a href="summary.flexsurvrtrunc.html">summary.flexsurvrtrunc</a></td>
+<td>Summarise quantities of interest from fitted flexsurvrtrunc models</td></tr>
+<tr><td style="width: 25%;"><a href="survrtrunc.html">survrtrunc</a></td>
+<td>Nonparametric estimator of survival from right-truncated, uncensored data</td></tr>
+<tr><td style="width: 25%;"><a href="Survspline.html">Survspline</a></td>
+<td>Royston/Parmar spline survival distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Survsplinek.html">Survsplinek</a></td>
+<td>Royston/Parmar spline survival distribution functions</td></tr>
+</table>
+
+<h2><a name="T">-- T --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="tidy.flexsurvreg.html">tidy.flexsurvreg</a></td>
+<td>Tidy a flexsurv model object</td></tr>
+<tr><td style="width: 25%;"><a href="totlos.fs.html">totlos.fs</a></td>
+<td>Total length of stay in particular states for a fully-parametric, time-inhomogeneous Markov multi-state model</td></tr>
+<tr><td style="width: 25%;"><a href="totlos.simfs.html">totlos.simfs</a></td>
+<td>Expected total length of stay in specific states, from a fully-parametric, semi-Markov multi-state model</td></tr>
+</table>
+
+<h2><a name="U">-- U --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="unroll.function.html">unroll.function</a></td>
+<td>Convert a function with matrix arguments to a function with vector arguments.</td></tr>
+</table>
+
+<h2><a name="W">-- W --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="WeibullPH.html">WeibullPH</a></td>
+<td>Weibull distribution in proportional hazards parameterisation</td></tr>
+</table>
+
+<h2><a name="misc">-- misc --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="flexsurv-package.html">_PACKAGE</a></td>
+<td>flexsurv: Flexible parametric survival and multi-state models</td></tr>
+</table>
+</body></html>

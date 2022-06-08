@@ -1,0 +1,16 @@
+Package: muhaz
+Description: Produces a smooth estimate of the hazard
+  function for censored data.
+Version: 1.2.6.4
+Author: S original by Kenneth Hess,  
+        R port by R. Gentleman
+Title: Hazard Function Estimation in Survival Analysis
+Depends: R(>= 2.3)
+Imports: survival
+License: GPL
+Maintainer: David Winsemius <dwinsemius@comcast.net>
+Packaged: 2021-04-21 07:38:10 UTC; hornik
+Repository: CRAN
+Date/Publication: 2021-04-21 10:43:31 UTC
+NeedsCompilation: yes
+Built: R 4.1.0; x86_64-pc-linux-gnu; 2021-07-26 04:05:01 UTC; unix

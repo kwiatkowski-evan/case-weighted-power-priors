@@ -1,0 +1,12 @@
+kphaz.fit	kphaz.fit
+kphaz.plot	kphaz.plot
+lines.muhaz	plot.muhaz
+lines.pehaz	plot.pehaz
+muhaz	muhaz
+muhaz.object	muhaz.object
+pehaz	pehaz
+pehaz.object	pehaz.object
+plot.muhaz	plot.muhaz
+plot.pehaz	plot.pehaz
+print.pehaz	print.pehaz
+summary.muhaz	summary.muhaz

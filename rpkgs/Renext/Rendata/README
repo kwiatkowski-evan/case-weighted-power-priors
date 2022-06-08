@@ -1,0 +1,129 @@
+                ===================================
+
+                  NOTES about 'Rendata' version 3
+		  		 
+                ===================================
+                
+CONTENT
+=======
+
+This directory contains examples data that can be used 
+with the functions of Renext.
+
+index.xml
+
+	This file indexes the data in order to allow a simultaneous
+	reading of all data needed in a particular study. It can be
+	used by several "client" programms such as R (with the 
+	XML package).
+
+indexHtml.xsl
+
+	xsl style sheet allowing a recent web browser to display
+	the 'index.xml' content in a friendly fashion. We recommand
+	Firefox (which rendering was tested) but other browset (such safari) 
+	should work as well. The browser should format "on the fly" the 
+	XML data according the instructions given in the XSL file. 
+	Alternatively, an (X)HTML file can be generated 
+	using an XLST formatting program such as Saxon or Xalan.
+
+files .csv
+
+	The csv (comma separated values) data genrally use the  
+	comma ";" as column separator. They can be used via suitable
+	instructions in the .xml file and are imported by many
+	spreadsheet programs such as OpenOffice.
+
+
+CAUTION
+=======
+
+- numerical data are asumed to have a decimal point (.) separator which
+is the default in R. 
+
+- dates should be given within the XML file in POSIX format 
+"yyyy-mm-dd" (e.g. "2006-11-01").
+
+
+REMARKS: date and datetime
+==========================
+  
+  In the R framework, several classes of date/ datetime objects 
+  exist. Only "POSIXct" objects are used by Renext,
+  for the sake of simplicity and universality. This class is
+  preferred to the 'date' class. Yet the XML description and
+  the csv files will often contain dates (without time) that
+  will be considered as a datetime with time "00:00:00", which
+  is the default choice in R
+
+  XML datetimes (dateTime) format is slightly different from R
+  standard format.
+	 
+  [XML] "2010-04-21T01:20:10"  [R] "2010-04-21 01:20:10"
+
+  However, the R function "as.POSIXct" accepts the first form
+  as well as the second. This function also accepts understandable 
+  abbreviations such as  "2010-04-21T01".
+
+PRINCIPLES
+==========
+Two major types of data can be given within the XML file as
+nodes.
+
+ a) EVENTS: association of a date or datetime 
+ and a value. The value can be missing and should be 
+ considered as such in the R framework.    	 
+ 
+ <events>
+    <event date="2009-01-10" comment="strom">120</evt>
+    <event date="2010-02-28" comment="Xinthia">280</evt>
+    ...
+ </events>
+
+ b)PERIODS (maybe years????)
+  
+ <periods>
+   <period start="2001-01-10" end="2001-02-03" comment="breakdown"/>
+   <period start="2008-02-23" end="2008-02-28" comment="strike"/>
+   ...
+ </periods>
+
+
+CSV FILES
+=========
+Each of the nodes <events/> and <periods/> can be replaced
+by a similar content to be read from a csv file. 'date',
+'start', 'end' and optional 'comment' should be columns
+of the file. Then a <node/> element should be used. This
+node will have type 'eventsFile' or 'periodsFile' in the
+XML schema. In both cases the needed informations (which 
+column gives the date, ...) are given as attributes.
+
+Date and datetime format attributes for the files
+should be given using the R styles (cf. help of the 'strptime' function
+in the base package) e.g. "%d/%m/%Y".
+
+NO CONTROL is possible for the content of the csv files at the 
+XML level.
+
+REMARKS
+=======
+
+The XML schema allows several simultaneous "OTSdata" nodes and/or
+several "MAXdata". Both types correspond to "historical" data"
+
+- MAXdata contain largest values by blocks or "r-largest" order
+statistics in a statistical framework.
+
+- OTSdata contain all the values over a known threshold which
+should be greater than the threshold of the main OTdata. When
+several OTSdata are given, they can have different thresholds.
+In practice, older OTSdata will typically have greater thresholds
+since only exceptional events can be trustworthy in old times.
+
+
+LIMITATIONS
+===========
+
+The retained specified format is not suited to contain several
+variables (e.g. surge/atmospheric pressure).

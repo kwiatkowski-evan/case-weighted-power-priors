@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<?xml-stylesheet href="./indexHtml.xsl" type="text/xsl" ?>
+<!-- ============================================================== -->
+<!--                                                                -->
+<!-- EXAMPLES of datasets in a standard format that can be managed  -->  
+<!-- using the readXML function of the Renext package (>= 0.8-0)    -->
+<!-- The present document instance should be validated against the  -->
+<!-- the provided "index.xsd" XML schema.                           -->
+<!--                                                                -->
+<!-- NOTE: when (missing) periods are given in a csv file 'start'   -->
+<!-- and end' must have the same format.                            -->
+<!--                                                                -->
+<!-- ============================================================== -->
+
+<datasets version="3.0">
+  <!-- ============================================================
+       Use Brest surge dataset. 
+    =============================================================== -->
+  <dataset 
+     name="Brest"
+     shortLab="Surge Heights at Brest (France)"
+     longLab="Surge Heights near high tide,  Brest (France)"
+     varName="Surge"
+     varShortLab="Surge"
+     varUnit="cm">
+    <describe>
+      High tide sea surge over 30 cm at <b>Brest</b>
+      (France) separated by <b>at least two days</b>.
+    </describe>
+    <OTdata 
+       start="1846-01-01"
+       end="2009-01-01"
+       effDuration="147.62"
+       threshold="30">
+      <!-- give here parameters for reading the file          -->
+      <data>
+	<file
+           path="Brest.csv"
+           sep=";" 
+	   skip="1" 
+	   nbCols="2"
+	   dtCol="1"
+           dtFormat="%Y-%m-%d" 
+	   dtLab="date"
+           varCol="2"/> 
+	<events>
+        </events>
+      </data>
+      <missing>
+	<file
+           path="Brest_missing.csv"
+           sep=";" 
+	   skip="1" 
+	   nbCols="3"
+	   startCol="1"
+	   endCol="2"
+           dtFormat="%Y-%m-%d" 
+	   commentCol="3"/>
+      </missing>  
+    </OTdata>
+  </dataset>
+ <!-- ============================================================
+      Use Dunkerque surge dataset. 
+    =============================================================== -->
+  <dataset 
+     name="Dunkerque"
+     shortLab="Surge Heights at Dunkerque (France)"
+     longLab="Surge Heights near high tide,  Dunkerque (France)"
+     varName="Surge"
+     varShortLab="Surge"
+     varUnit="cm">
+    <describe>
+      High tide sea surge over 30 cm at <b>Dunkerque</b>
+      (France) separated by <b>at least two days</b>.
+    </describe>
+    <OTdata 
+       start="1956-01-01"
+       end="2009-01-01"
+       effDuration="38.82"
+       threshold="30">
+      <!-- give here parameters for reading the file          -->
+      <data>
+	<file
+           path="Dunkerque.csv"
+           sep=";" 
+	   skip="1" 
+	   nbCols="2"
+	   dtCol="1"
+           dtFormat="%Y-%m-%d" 
+	   dtLab="date"
+           varCol="2"/> 
+	<events>
+        </events>
+      </data>
+      <missing>
+	<file
+           path="Dunkerque_missing.csv"
+           sep=";" 
+	   skip="1" 
+	   nbCols="3"
+	   startCol="1"
+	   endCol="2"
+           dtFormat="%Y-%m-%d" 
+	   commentCol="3"/>
+      </missing>  
+    </OTdata>
+    <MAXdata 
+       shortLab="archives"
+       start="1706-01-01"
+       end="1956-01-01">
+      <data>
+	<events>
+	  <!-- ================================================= -->
+	  <!-- Historical surge, believed not to have been       -->
+          <!-- exceeded 250 years before the measurment period.  -->
+	  <!-- ================================================= -->
+	  <event date="1953-02-01" comment="1">213</event>
+        </events>
+      </data> 
+    </MAXdata>
+
+  </dataset>
+  <!-- ============================================================
+       Garonne dataset of Miquel's book
+    =============================================================== -->
+  <dataset 
+     name="Garonne"
+     shortLab="La Garonne river flow"
+     longLab="La Garonne river flow at Le Mas d'Agenais"
+     varName="Flow"
+     varShortLab="Flow"
+     varUnit="m3/s">
+    <describe>
+      Flow of the french river <i>La Garonne</i> at the gauging station 
+      <i>Le Mas d'Agenais</i>. The data are taken from Miquel's book.
+    </describe>
+    <OTdata 
+       start="1913-01-01"
+       end="1978-01-01"
+       effDuration="65"
+       threshold="2500">
+      <!-- Here describe the csv file structure -->
+      <data>
+	<file
+           path="Garonne.csv"
+           sep=";" 
+	   skip="1" 
+	   nbCols="2"
+	   dtCol="1"
+           dtFormat="%Y-%m-%d" 
+	   dtLab="date"
+           varCol="2"/> 
+      </data>
+    </OTdata>
+    <MAXdata 
+       shortLab="archives"
+       start="1770-01-01"
+       end="1913-01-01">
+      <data>
+	<events>
+	  <!-- ================================================= -->
+	  <!-- CAUTION                                           -->
+	  <!-- Only the year is given in MIQUEL's book           -->
+	  <!-- Month and day have been guessed from. For the     -->
+	  <!-- year 1856, no reliable month/date was found,      -->
+	  <!-- although floods occured in the may-june period.   -->
+	  <!-- ================================================= -->
+	  <!-- "1875-06-25" -->
+	  <event date="1875" comment="1 (1875)">7500</event>
+	  <!-- "1770-04-05" -->
+	  <event date="1770" comment="2 (1770)">7400</event>
+	  <!-- "1783-03-03" -->
+	  <event date="1783" comment="3 (1783)">7000</event>
+	  <!-- "1855-06-05" -->
+	  <event date="1855" comment="4 (1855)">7000</event>
+	  <!-- "1879-02-25" -->
+	  <event date="1879" comment="5 (1879)">7000</event>
+	  <!-- "1856-06-01" -->
+	  <event date="1856" comment="6 (1856)">6600</event>
+	  <!-- "1827-05-22" -->
+	  <event date="1827" comment="7 (1827)">6500</event>
+	  <!-- "1843-01-18" -->
+	  <event date="1843" comment="8 (1843)">6500</event>
+	  <!-- "1835-06-01" -->
+	  <event date="1835" comment="9 (1835)">6400</event>
+	  <!-- "1772-07-31" -->
+	  <event date="1772" comment="10 (1772)">6300</event>
+	  <!-- "1879-02-20" -->
+	  <event date="1879" comment="11 (1879)">6300</event>
+	  <!-- "1856" -->
+	  <event date="1856" comment="12 (1856)">6200</event>
+        </events>
+      </data> 
+    </MAXdata>
+  </dataset>
+  <!-- ============================================================
+       Test: fictious data
+    =============================================================== -->
+  <dataset 
+     name="test1"
+     shortLab="test"
+     longLab="Artificial data for tests"
+     varName="Flow"
+     varShortLab="F"
+     varUnit="m3/s">
+    <describe>
+      Test data with articifical data: OTdata,  MAXdata and OTSdata.
+      The periods are chosen to check that old dates are supported.
+    </describe>
+    <OTdata 
+       start="1865-01-01"
+       end="2004-01-01"
+       effDuration="133.71"
+       threshold="400">
+      <data>
+	<events>
+	  <event date="1890-11-02" comment="fictious 1">1000</event>
+	  <event date="1926-02-10" comment="fictious 2">1400</event>
+	  <event date="1956-02-10" comment="fictious 3">900</event>
+	  <event date="1970-01-21" comment="fictious 4">1200</event>
+	  <event date="1998-02-24" comment="fictious 5">1900</event>
+	  <event date="2000-04-25" comment="fictious 6">2100</event>
+        </events>
+      </data>
+      <missing>
+	<periods>
+          <period start="1867-01-01" end="1868-01-01" comment="a period"/>
+	  <period start="1914-07-28" end="1918-11-11" comment="War"/>
+	</periods>
+      </missing>  
+    </OTdata>
+    <OTSdata 
+       shortLab="Middle-age 1"
+       start="0010-01-01"
+       end="0400-01-01"
+       threshold="1800">
+      <data>
+      </data> 
+    </OTSdata>
+    <OTSdata 
+       shortLab="Middle-age 2"
+       start="0500-01-01"
+       end="0600-01-01"
+       threshold="2200">
+      <data>
+	<events>
+	  <event date="0529-09-13" comment="Deluge">3900</event>
+        </events>
+      </data> 
+    </OTSdata>
+    <OTSdata 
+       start="1500-01-01"
+       end="1600-01-01"
+       threshold="600">
+      <data>
+	<events>
+	  <event date="1515-09-13" comment="Flood 1">1900</event>
+	  <event date="1597-01-21" comment="Flood 2">2900</event>
+        </events>
+      </data> 
+    </OTSdata>
+    <MAXdata 
+       start="1212-01-11"
+       end="1400-01-01">
+      <data>
+	<events>
+	  <event date="1230-12-13" comment="Largest flood 1">2900</event>
+        </events>
+      </data> 
+    </MAXdata>
+    <MAXdata 
+       start="1000-01-01"
+       end="1200-01-01">
+      <data>
+	<events>
+	  <event date="1040-12-13" comment="Largest flood A">2700</event>
+	  <event date="1125-10-23" comment="Largest flood B">3110</event>
+	</events>
+      </data> 
+    </MAXdata>
+  </dataset>
+</datasets>

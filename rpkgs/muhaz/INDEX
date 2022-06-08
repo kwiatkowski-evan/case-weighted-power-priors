@@ -1,0 +1,15 @@
+kphaz.fit               kphaz.fit
+kphaz.plot              kphaz.plot
+muhaz                   Estimate hazard function from right-censored
+                        data.
+muhaz.object            Estimated Hazard Rate Object
+pehaz                   Estimates piecewise exponential hazard function
+                        from right-censored data.
+pehaz.object            Estimated Piecewise Exponential Hazard Rate
+                        Object
+plot.muhaz              Plots estimated hazard function from an object
+                        of class muhaz.
+plot.pehaz              Plot a pehaz object.
+print.pehaz             Print a pehaz object.
+summary.muhaz           Display the most important input parameters
+                        used in calling the 'muhaz' function.

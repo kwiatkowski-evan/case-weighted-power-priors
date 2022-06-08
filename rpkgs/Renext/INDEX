@@ -1,0 +1,96 @@
+Brest                   Surge heights at Brest
+Brest.years             Surge heights at Brest partial data
+Brest.years.missing     Years with missing periods in 'Brest.year'
+                        dataset
+CV2                     Squared Coefficient of Variation
+CV2.test                CV2 test of exponentiality
+Dunkerque               Surge heights at Dunkerque
+EM.mixexp               Expectation-Maximisation for a mixture of
+                        exponential distributions
+GPD                     Generalised Pareto Distribution
+Garonne                 Flow of the french river La Garonne
+Hpoints                 Plotting positions for exponential return
+                        levels
+Jackson                 Jackson's statistic
+Jackson.test            Jackson's test of exponentiality
+LRExp                   Likelihood Ratio statistic for exponential vs.
+                        GPD
+LRExp.test              Likelihood Ratio test of exponentiality vs. GPD
+LRGumbel                Likelihood Ratio statistic for Gumbel vs. GEV
+LRGumbel.test           Likelihood Ratio test for the Gumbel
+                        distribution
+Lomax                   Lomax distribution
+Maxlo                   'maxlo' distribution
+MixExp2                 Mixture of two exponential distributions
+NBlevy                  Negative Binomial Levy process
+OT2MAX                  Temporal aggregation of a Marked Process
+OTjitter                Add a small amount of noise to a numeric vector
+PPplot                  Diagnostic plots for Renouv objects
+RLlegend                Legend management for return level plots
+RLpar                   Graphical parameters for Return Level plots
+RLplot                  Return level plot
+Ren2gev                 Translate a vector of coefficients from a
+                        Renewal-POT model with Pareto excesses into a
+                        vector of GEV parameters
+Ren2gumbel              Translate a vector of coefficients from a
+                        Renewal-POT model with exponential excesses to
+                        a vector of Gumbel parameters
+Renext-package          Renewal Method for Extreme Values Extrapolation
+Renouv                  Fit a 'Renouvellement' model
+RenouvNoEst             Define a 'renouvellement' model without
+                        estimation
+SLTW                    Shifted Left Truncated Weibull (SLTW)
+                        distribution
+SandT                   Compute empirical survivals (S) and return
+                        periods (T)
+anova.Renouv            Compute an analysis of deviance table for two
+                        nested Renouv objects
+barplotRenouv           Barplot for Renouv "Over Threshold" counts
+expplot                 Classical "exponential distribution" plot
+fGEV.MAX                Fit a GEV distribution from block maxima or r
+                        largest order statistics using an aggregated
+                        Renewal POT process
+fGPD                    Fit a two-parameters Generalised Pareto
+                        Distribution from a sample
+fgamma                  ML estimation of the Gamma distribution
+flomax                  ML estimation of the Lomax distribution
+fmaxlo                  ML estimation of a 'maxlo' distribution
+fweibull                ML estimation of classical Weibull distribution
+gev2Ren                 Translate a vector of GEV parameters into
+                        renewal model
+gof.date                Goodness-of-fit for the distribution of dates
+gofExp.test             Goodness-of-fit test for exponential
+                        distribution
+gumbel2Ren              Translate a vector of Gumbel parameters into a
+                        vector of parameters for a renewal model
+ini.mixexp2             Simple estimation for the mixture of two
+                        exponential distributions
+interevt                Interevents (or interarrivals) from events
+                        dates
+logLik.Renouv           Log-likelihood of a "Renouv" object
+mom.mixexp2             Moment estimation for the mixture of two
+                        exponential distributions
+mom2par                 Parameters from moments
+pGreenwood1             Probability that the Greenwood's statistic is
+                        smaller than one
+parDeriv                Derivation of probability functions with
+                        respect to the parameters
+parIni.MAX              Initial estimation of GPD parameters for an
+                        aggregated renewal model
+plot.Rendata            Plot a Rendata object
+plot.Renouv             Plot an object of class "Renouv"
+predict.Renouv          Compute return levels and confidence limits for
+                        a "Renouv" object
+qStat                   Quantiles of a test statistic
+rRendata                Simulate a random RenData object
+readXML                 Read data using an XML index file
+roundPred               Round quantiles in a pseudo-prediction table
+skip2noskip             Fix non-skipped periods from skipped ones
+spacings                Methods computing spacings between Largest
+                        Order Statistics
+summary.Rendata         Summary and print methods for "Rendata" objects
+summary.Renouv          Summary and print methods for "Renouv" objects
+translude               Make translucient colors
+vcov.Renouv             Variance-covariance matrix of the estimates of
+                        a "Renouv" object
+weibplot                Classical Weibull distribution plot

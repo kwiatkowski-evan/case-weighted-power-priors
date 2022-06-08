@@ -1,0 +1,58 @@
+CmdStanGQ               CmdStanGQ objects
+CmdStanMCMC             CmdStanMCMC objects
+CmdStanMLE              CmdStanMLE objects
+CmdStanModel            CmdStanModel objects
+CmdStanVB               CmdStanVB objects
+cmdstan_model           Create a new CmdStanModel object
+cmdstanr-package        CmdStanR: the R interface to CmdStan
+cmdstanr_example        Fit models for use in examples
+eng_cmdstan             CmdStan knitr engine for Stan
+fit-method-cmdstan_summary
+                        Run CmdStan's 'stansummary' and 'diagnose'
+                        utilities
+fit-method-draws        Extract posterior draws
+fit-method-init         Extract user-specified initial values
+fit-method-inv_metric   Extract inverse metric (mass matrix) after MCMC
+fit-method-loo          Leave-one-out cross-validation (LOO-CV)
+fit-method-lp           Extract log probability (target)
+fit-method-metadata     Extract metadata from CmdStan CSV files
+fit-method-mle          Extract (penalized) maximum likelihood estimate
+                        after optimization
+fit-method-num_chains   Extract number of chains after MCMC
+fit-method-output       Access console output
+fit-method-profiles     Return profiling data
+fit-method-return_codes
+                        Extract return codes from CmdStan
+fit-method-sampler_diagnostics
+                        Extract sampler diagnostics after MCMC
+fit-method-save_object
+                        Save fitted model object to a file
+fit-method-save_output_files
+                        Save output and data files
+fit-method-summary      Compute a summary table of estimates and
+                        diagnostics
+fit-method-time         Report timing of CmdStan runs
+install_cmdstan         Install CmdStan or clean and rebuild an
+                        existing installation
+model-method-check_syntax
+                        Check syntax of a Stan program
+model-method-compile    Compile a Stan program
+model-method-generate-quantities
+                        Run Stan's standalone generated quantities
+                        method
+model-method-optimize   Run Stan's optimization algorithms
+model-method-sample     Run Stan's MCMC algorithms
+model-method-sample_mpi
+                        Run Stan's MCMC algorithms with MPI
+model-method-variational
+                        Run Stan's variational approximation algorithms
+read_cmdstan_csv        Read CmdStan CSV files into R
+read_sample_csv         Read CmdStan CSV files from sampling into R
+register_knitr_engine   Register CmdStanR's knitr engine for Stan
+set_cmdstan_path        Get or set the file path to the CmdStan
+                        installation
+stan_threads            Set or get the number of threads used to
+                        execute Stan models
+write_stan_file         Write Stan code to a file
+write_stan_json         Write data to a JSON file readable by CmdStan
+write_stan_tempfile     Write Stan code to a temporary file

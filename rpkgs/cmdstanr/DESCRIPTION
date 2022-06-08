@@ -1,0 +1,47 @@
+Package: cmdstanr
+Title: R Interface to 'CmdStan'
+Version: 0.4.0
+Date: 2021-04-15
+Authors@R: 
+    c(person(given = "Jonah", family = "Gabry", role = c("aut", "cre"),
+           email = "jsg2201@columbia.edu"),
+      person(given = "Rok", family = "Češnovar", role = "aut", 
+           email = "rok.cesnovar@fri.uni-lj.si"),     
+      person(given = "Ben", family = "Bales", role = "ctb"),     
+      person(given = "Mitzi", family = "Morris", role = "ctb"), 
+      person(given = "Mikhail", family = "Popov", role = "ctb"), 
+      person(given = "Mike", family = "Lawrence", role = "ctb"), 
+      person(given = c("William", "Michael"), family = "Landau", role = "ctb",
+           email = "will.landau@gmail.com", comment = c(ORCID = "0000-0003-1878-3253")))
+Description: A lightweight interface to 'Stan' <https://mc-stan.org>.
+    The 'CmdStanR' interface is an alternative to 'RStan' that calls the command 
+    line interface for compilation and running algorithms instead of interfacing 
+    with C++ via 'Rcpp'. Methods are provided for conveniently reading the 
+    results into R.
+License: BSD_3_clause + file LICENSE
+URL: https://mc-stan.org/cmdstanr, https://discourse.mc-stan.org
+BugReports: https://github.com/stan-dev/cmdstanr/issues
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.1
+Roxygen: list(markdown = TRUE, r6 = FALSE)
+SystemRequirements: CmdStan
+        (https://mc-stan.org/users/interfaces/cmdstan)
+Imports: checkmate, data.table, jsonlite (>= 1.2.0), posterior (>=
+        0.1.3), processx (>= 3.4.5), R6 (>= 2.4.0)
+Suggests: bayesplot, knitr, loo (>= 2.0.0), rmarkdown, testthat (>=
+        2.1.0)
+Additional_repositories: https://mc-stan.org/r-packages/
+VignetteBuilder: knitr
+Remotes: stan-dev/posterior
+NeedsCompilation: no
+Packaged: 2021-04-15 19:01:52 UTC; jgabry
+Author: Jonah Gabry [aut, cre],
+  Rok Češnovar [aut],
+  Ben Bales [ctb],
+  Mitzi Morris [ctb],
+  Mikhail Popov [ctb],
+  Mike Lawrence [ctb],
+  William Michael Landau [ctb] (<https://orcid.org/0000-0003-1878-3253>)
+Maintainer: Jonah Gabry <jsg2201@columbia.edu>
+Built: R 4.1.0; ; 2021-08-21 03:43:24 UTC; unix

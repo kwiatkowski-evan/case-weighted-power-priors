@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"> 
+  <!-- ============================================================
+       XML schema for the 'index.xml' file. Must be compatible with
+       the 'readXML' function in Renext >= 0.8-0
+       
+       Author Y. Deville
+
+       TODO 
+
+       - write the regular expression suporting POSIX date 
+       as well as datatime format in R style "2010-02-01 11:00:20"
+       At the time Only limited control for the time part
+       
+       - Enable year/yearMonth for periods or not???
+       ============================================================= -->
+  <xs:simpleType name="dateTime">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9]{1,4}-[0-1][0-9]-[0-3][0-9].*"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="dateTimeOrNA">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9]{1,4}(-[0-1][0-9]-[0-3][0-9])?.*"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- period  with start and end -->
+  <xs:complexType name="period">
+    <xs:attribute name="start" type="dateTime" use="required"/>
+    <xs:attribute name="end" type="dateTime" use="required"/>
+    <xs:attribute name="comment" type="xs:string"/>
+  </xs:complexType>
+  <!-- year year-month: NOT USED YET  -->
+  <xs:complexType name="year">
+    <xs:attribute name="which" type="xs:gYear" use="required"/>
+    <xs:attribute name="comment" type="xs:string"/>
+  </xs:complexType>
+  <xs:complexType name="yearMonth">
+    <xs:attribute name="which" type="xs:gYearMonth" use="required"/>
+    <xs:attribute name="comment" type="xs:string"/>
+  </xs:complexType>
+  <!-- file containing periods (with possible comment) -->
+  <xs:complexType name="periodsFile">
+    <xs:attribute name="path" type="xs:anyURI" use="required"/>
+    <xs:attribute name="sep" type="xs:string" default=";"/>
+    <xs:attribute name="skip" type="xs:integer"/>
+    <xs:attribute name="nbCols" type="xs:integer"/>
+    <xs:attribute name="startCol" type="xs:integer"/>
+    <xs:attribute name="endCol" type="xs:integer"/>
+    <xs:attribute name="dtFormat" type="xs:string"/>
+    <xs:attribute name="commentCol" type="xs:integer" default="0"/>
+  </xs:complexType>
+  <!-- period sequence -->
+  <xs:complexType name="periodsSequence" >
+    <xs:sequence>
+      <xs:element name="period" type="period" minOccurs="0" maxOccurs="unbounded">
+      </xs:element>
+      <!-- <xs:element name="year" type="year" minOccurs="0" maxOccurs="unbounded">
+       </xs:element> -->
+    </xs:sequence>
+  </xs:complexType>
+  <!-- period data either File or Seq  -->
+  <xs:complexType name="periodsData" >
+    <xs:sequence>
+      <xs:element name="file" type="periodsFile" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="periods" type="periodsSequence" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- events file for OT or MAX data -->
+  <xs:complexType name="eventsFile">
+    <!-- <xs:attribute name="path" type="xs:anyURI" use="required"/> -->
+    <xs:attribute name="path" type="xs:string" use="required"/>
+    <xs:attribute name="sep" type="xs:string" default=";"/>
+    <xs:attribute name="skip" type="xs:integer"/>
+    <xs:attribute name="nbCols" type="xs:integer"/>
+    <xs:attribute name="dtCol" type="xs:integer"/>
+    <xs:attribute name="dtFormat" type="xs:string"/>
+    <xs:attribute name="dtLab" type="xs:string"/>
+    <xs:attribute name="varCol" type="xs:integer"/>
+    <xs:attribute name="commentCol" type="xs:integer" default="0"/>
+  </xs:complexType>
+  <!-- evnts for OT or MAX data -->
+  <xs:complexType name="event">
+    <xs:simpleContent>
+      <xs:extension base="xs:decimal">
+	<xs:attribute name="date" type="dateTimeOrNA" use="required"/>
+	<xs:attribute name="comment" type="xs:string"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <!-- events sequence for OT or MAX data -->
+  <xs:complexType name="eventsSequence" >
+    <xs:sequence>
+      <xs:element name="event" type="event" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- obs data either File or Seq -->
+  <!-- NOTE: there can be events sequence AND events file -->
+  <xs:complexType name="eventsData">
+    <xs:sequence>
+      <xs:element name="file" type="eventsFile" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="events" type="eventsSequence" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- xhtml-like content -->
+  <xs:complexType name="describe" mixed="true">
+    <xs:sequence>
+      <xs:element name="i" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="b" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="strong" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="code" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- For OT data we have ALL observations over the threshold -->
+  <xs:complexType name="OTdata">
+    <xs:annotation>
+      <xs:documentation>
+	 OTdata describe ALL events with level strictly over the threshold,
+	 except those that could have occured during missing periods. The 
+	 sum of all missing periods durations should be coherent with the
+	 difference duration - effective duration,
+	 but no control is done at the XML level. Note that there can be no observations!
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="data" type="eventsData" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="missing" type="periodsData" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute name="start" type="dateTime"/>
+    <xs:attribute name="end" type="dateTime"/>
+    <xs:attribute name="effDuration" type="xs:string"/>
+    <xs:attribute name="threshold"/> 
+  </xs:complexType>
+ <!-- For OTS data we have ALL observations over the threshold -->
+  <xs:complexType name="OTSdata">
+    <xs:annotation>
+      <xs:documentation>
+	 <code>OTSdata</code> describe ALL events with level strictly over the threshold,
+	 except those that could have occured during missing periods. The 
+	 sum of all missing periods durations should be coherent with the
+	 difference duration - effective duration,
+	 but no control is done at the XML level. Note that there can be no observations!
+	 
+	 OTSdata is basically the same thing as <code>OTdata</code>, but can not
+	 contain a description of missing periods. It will be used for 
+	 optional historical data.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="data" type="eventsData" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute name="shortLab" type="xs:string"/>
+    <xs:attribute name="start" type="dateTime"/>
+    <xs:attribute name="end" type="dateTime"/>
+    <xs:attribute name="duration" type="xs:string"/>
+    <xs:attribute name="threshold"/> 
+  </xs:complexType>
+  <!-- MAXdata part -->
+  <xs:complexType name="MAXdata" >
+    <xs:annotation>
+      <xs:documentation>
+	 <code>MAXdata</code> describe the events with the 'r-largest' levels on the period.
+	 No missing periods are allowed here. Note that 'r' is found as the number
+	 of observations in file or observations fields.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="data" type="eventsData" minOccurs="1" maxOccurs="1">
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="shortLab" type="xs:string"/>
+    <xs:attribute name="start" type="dateTime"/>
+    <xs:attribute name="end" type="dateTime"/>
+    <!-- <xs:attribute name="duration" type="xs:string"/> -->
+  </xs:complexType>
+  <!-- Now the whole set  -->
+  <xs:element name="datasets">
+    <xs:complexType>
+      <xs:annotation>
+	<xs:documentation>
+	 A dataset contains one or more <code>OTdata</code> element, with the
+	 first one being the principal. It can also contain <code>MAXdata</code> 
+	 sets with possibly differing numbers of largest values. The variable in all 
+	 datasets is assumed to be the same and to keep the same unit
+	 across OTdata or MAXdata.
+	</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+	<xs:element name="dataset" maxOccurs="unbounded">
+	  <xs:complexType>
+	    <xs:sequence>
+	      <xs:element name="describe" type="describe" minOccurs="1" maxOccurs="1">
+	      </xs:element>
+	      <xs:element name="OTdata" type="OTdata" minOccurs="1" maxOccurs="1">
+	      </xs:element>
+	      <xs:element name="OTSdata" type="OTSdata" minOccurs="0" maxOccurs="unbounded">
+	      </xs:element>
+	      <xs:element name="MAXdata" type="MAXdata" minOccurs="0" maxOccurs="unbounded">
+	      </xs:element>  
+	    </xs:sequence>
+	    <xs:attribute name="name" type="xs:string"/>
+	    <xs:attribute name="shortLab" type="xs:string"/>
+	    <xs:attribute name="longLab" type="xs:string"/>
+	    <xs:attribute name="varName" type="xs:string"/>
+	    <xs:attribute name="varShortLab" type="xs:string"/>
+	    <xs:attribute name="varUnit" type="xs:string"/> 
+	  </xs:complexType>
+	</xs:element> 
+      </xs:sequence>
+      <xs:attribute name="version" type="xs:string"/> 
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>
+

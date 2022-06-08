@@ -1,0 +1,34 @@
+.clinClass-class        S4 Class for specifying parameters for
+                        enrollment time, drop-out pattern and analysis
+                        start time
+.covClass-class         S4 Class for setting up covariates
+.eventClass-class       S4 Class for setting parameters for
+                        time-to-events
+.priorClass-class       S4 Class for specifying prior distributions and
+                        predictors for MCMC methods
+c,.covClass-method      Concatenate multiple '.covClasss' classes
+c,.priorClass-method    Concatenate multiple '.priorClasss' class
+get_summary             Generate summary statistics of a simulation
+                        scenario
+match_cov               Match
+plot_bias               Plot bias
+plot_hr                 Plot posterior hazard ratio between treatment
+                        and control
+plot_mse                Plot MSE
+plot_power              Plot power
+plot_type1error         Plot type 1 error
+rej_est                 Generate summary statistics for the MCMC chains
+run_mcmc                Run MCMC for multiple scenarios with provided
+                        data
+run_mcmc_p              Run MCMC for multiple scenarios with provided
+                        data with parallel processing
+set_clin                Specify parameters for enrollment time,
+                        drop-out pattern and analysis start time
+set_cov                 Set up covariates
+set_event               Set up time-to-events
+set_n                   Simulate external trial indicator and treatment
+                        arm indicator
+set_prior               Specify prior distributions and predictors for
+                        MCMC methods
+simu_cov                Simulate covariates
+simu_time               Simulate time-to-events for multiple scenarios
