@@ -1,4 +1,29 @@
-load(file = 'args_model.RData') # loads all model information include prior parameters AND SETS SEED
+set.seed(101)
+
+# Data are generated to mimic the external control (RCT) and randomized
+# randomized controlled trial (RCT) data sets analyzed, without including 
+# individual-level data.
+
+external <- c(rep(1, 547),        # EC
+              rep(0, 850))        # RCT
+treat    <- c(rep(0, 547 + 425),  # control
+              rep(1, 425))        # treated
+sex2     <- c(rep(0, 243),        # male EC
+              rep(1, 304),        # female EC
+              rep(0, 330),        # male RCT
+              rep(1, 520))        # female RCT 
+age <- c(rnorm(243, 66.18, 9.63), # male EC
+         rnorm(304, 67.79, 8.50), # female EC
+         rnorm(330, 62.64, 9.68), # male RCT
+         rnorm(520, 63.52, 9.09)) # female RCT
+
+X.all <- data.frame(external, treat, sex2, age)
+
+theta2 <- c(-5.493429, -6.533711)
+names(theta2) <- c("interval1", "interval2")
+
+mu2 <- c(-0.316176599, 0.009002796, 0.231969682, -6.832722957, -6.768120447)
+names(mu2) <- c(treat, age, sex2, interval1, interval2)
 
 cut.time <- c(0, 207)
 inner.t  <- cut.time[-1]
